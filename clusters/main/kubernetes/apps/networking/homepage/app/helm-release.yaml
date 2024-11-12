@@ -1,0 +1,367 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.zinn.ca/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: homepage
+    namespace: networking
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: homepage
+            version: 9.3.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: homepage
+    values:
+        credentials:
+            s3:
+                type: s3
+                url: "${S3URL}"
+                bucket: homepage-config
+                accessKey: "${S3ID}"
+                secretKey: "${S3KEY}"
+                encrKey: "${S3EKEY}"
+        TZ: America/Los_Angeles
+        configmap:
+            config:
+                data:
+                    bookmarks.yaml: |
+                        ---
+                        # For configuration options and examples, please see:
+                        # https://gethomepage.dev/latest/configs/bookmarks
+
+                        - Developer:
+                            - Github:
+                                - abbr: GH
+                                  href: https://github.com/
+
+                        - Social:
+                            - Reddit:
+                                - abbr: RE
+                                  href: https://reddit.com/
+
+                        - Entertainment:
+                            - YouTube:
+                                - abbr: YT
+                                  href: https://youtube.com/
+
+                        - TrueCharts:
+                            - TrueCharts:
+                              - abbr: TC
+                                icon: https://truecharts.org/svg/favicon.svg
+                                href: https://truecharts.org
+                                description: "TrueCharts Website"
+                            - Github:
+                              - abbr: GH
+                                icon: https://github.com/fluidicon.png
+                                href: https://github.com/truecharts
+                                description: "TrueCharts GitHub"
+                            - Open Collective:
+                              - abbr: TC
+                                icon: https://opencollective.com/favicon.ico
+                                href: https://opencollective.com/truecharts
+                                description: "TrueCharts Open Collective"
+                            - Discord:
+                              - abbr: DC
+                                icon: https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://discord.com&size=32
+                                href: https://truecharts.org/s/discord
+                                description: "TrueCharts Discord"
+                    custom.css: ""
+                    custom.js: ""
+                    kubernetes.yaml: |
+                        mode: cluster
+                    services.yaml: "---\n# For configuration options and examples, please see:\n# https://gethomepage.dev/latest/configs/services\n- Content Management:\n  - Prowlarr:\n      icon: prowlarr\n      href: https://prowlarr.sf.wethecommon.com\n      description: Usenet Indexer Manager\n      widget:\n        type: prowlarr\n        url: http://192.168.10.10:9696\n        key: 8572025561b846be937dfe1d05196cff\n\n  - Roon:\n      icon: https://www.frankprowsehifi.com.au/wp-content/uploads/2019/11/ROON.png\n      href: https://roonsettings.sf.wethecommon.com\n      description: Music Storage/Player\n\n- Networking:\n  - PiHole:\n      icon: https://chriskirby.net/content/images/2023/01/pihole-wide-header.png\n      href: http://192.168.10.3/admin\n      description: DNS and Ad Blocker\n      widget:\n        type: pihole\n        url: http://192.168.10.3\n        key: 3600d775970716c74a077dc040e704bea8189e555c9ed7c79005563588e95e63\n\n  - Unifi:\n      icon: unifi\n      href: https://192.168.10.1:443\n      description: Network Router/Switch/Client Management\n      widget:\n        type: unifi\n        url: https://192.168.10.1:443\n        username: homepage\n        password: CNuGGQLz6Pth\n\n  - Traefik:\n      icon: traefik\n      href: https://traefikdashboard.sf.wethecommon.com/dashboard\n      description: Network Reverse Proxy\n      widget:\n        type: traefik\n        url: https://192.168.10.170:443\n\n- Data & Virtualization:\n  - ProxMox:\n      icon: proxmox\n      href: https://proxmox.sf.wethecommon.com\n      description: Virtualization Management\n      widget:\n        type: proxmox\n        url: https://192.168.10.30:8006\n        username: api@pam!homepage\n        password: e7c4e37b-1e10-4876-95c8-f4425493bb8c\n        node: pibbthecat\n\n  - TrueNas:\n      icon: truenas\n      href: https://truenas.sf.wethecommon.com\n      description: NAS and Virtualized Services\n      widget:\n        type: truenas\n        url: https://192.168.10.122:444\n        username: root\n        password: Oboe1993\n        enablePools: true\n        nasType: scale\n\n- Home Automation:\n  - HomeAssistant:\n      icon: https://lab.uberspace.de/_images/homeassistant.png\n      href: https://homeassistant.sf.wethecommon.com\n      description: HomeAssistant VM Dashboard\n      widget:\n        type: homeassistant\n        url: http://192.168.10.69:8123\n        key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI0ZWM0NTJjMTUwNDA0ZjQ4OTdkNDkyNGU5ODM1NjFlNiIsImlhdCI6MTcxNjQwODg2MCwiZXhwIjoyMDMxNzY4ODYwfQ.OSyDJcjmJGfzYx-ElGh_LQo8707iaNzf7_EjaD3xAL0\n\n  - HomeBridge:\n      icon: homebridge\n      href: https://homebridge.sf.wethecommon.com\n      description: HomeBridge VM Dashboard\n      widget:\n        type: homebridge\n        url: http://192.168.10.92:8581\n        username: zach\n        password: jxv7dmq0vrh!tmx_FBD"
+
+
+                    settings.yaml: |
+                        ---
+                        # For configuration options and examples, please see:
+                        # https://gethomepage.dev/latest/configs/settings
+
+                        providers:
+                          openweathermap: openweathermapapikey
+                          weatherapi: weatherapiapikey
+                    widgets.yaml: |
+                        ---
+                        # For configuration options and examples, please see:
+                        # https://gethomepage.dev/latest/configs/widgets
+
+                        - unifi_console:
+                        url: https://192.168.10.1:443
+                        username: homepage
+                        password: CNuGGQLz6Pth
+
+                        - resources:
+                          cpu: true
+                          memory: true
+                          disk: /
+
+                        - search:
+                           provider: duckduckgo
+                            target: _blank
+
+                        - datetime:
+                          text_size: xl
+                        # 1/23/22, 1:37 PM
+                           format:
+                          dateStyle: short
+                          timeStyle: short
+                          hour12: true
+                enabled: true
+        forceConfigFromValues: false
+        ingress:
+            main:
+                enabled: true
+                hosts:
+                    - host: homepage.${BASE_DOMAIN}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    traefik:
+                        enabled: true
+                        middlewares:
+                            - name: local
+                              namespace: traefik
+                            - name: bouncer
+                              namespace: traefik
+                        entrypoints:
+                            - websecure
+                    certManager:
+                        enabled: true
+                        certificateIssuer: wethecommon-prod
+        persistence:
+            bookmarks-config:
+                enabled: '{{ not .Values.forceConfigFromValues }}'
+                mountPath: /dummy-config/bookmarks.yaml
+                objectName: config
+                readOnly: true
+                subPath: bookmarks.yaml
+                targetSelector:
+                    main: {}
+                type: configmap
+            config:
+                enabled: true
+                targetSelector:
+                    main:
+                        mountPath: /config
+            custom-css-config:
+                enabled: '{{ not .Values.forceConfigFromValues }}'
+                mountPath: /dummy-config/custom.css
+                objectName: config
+                readOnly: true
+                subPath: custom.css
+                targetSelector:
+                    main: {}
+                type: configmap
+            custom-js-config:
+                enabled: '{{ not .Values.forceConfigFromValues }}'
+                mountPath: /dummy-config/custom.js
+                objectName: config
+                readOnly: true
+                subPath: custom.js
+                targetSelector:
+                    main: {}
+                type: configmap
+            force-bookmarks-config:
+                enabled: '{{ .Values.forceConfigFromValues }}'
+                mountPath: /app/config/bookmarks.yaml
+                objectName: config
+                readOnly: true
+                subPath: bookmarks.yaml
+                type: configmap
+            force-custom-css-config:
+                enabled: '{{ .Values.forceConfigFromValues }}'
+                mountPath: /app/config/custom.css
+                objectName: config
+                readOnly: true
+                subPath: custom.css
+                type: configmap
+            force-custom-js-config:
+                enabled: '{{ .Values.forceConfigFromValues }}'
+                mountPath: /app/config/custom.js
+                objectName: config
+                readOnly: true
+                subPath: custom.js
+                type: configmap
+            force-services-config:
+                enabled: '{{ .Values.forceConfigFromValues }}'
+                mountPath: /app/config/services.yaml
+                objectName: config
+                readOnly: true
+                subPath: services.yaml
+                type: configmap
+            force-settings-config:
+                enabled: '{{ .Values.forceConfigFromValues }}'
+                mountPath: /app/config/settings.yaml
+                objectName: config
+                readOnly: true
+                subPath: settings.yaml
+                type: configmap
+            force-widgets-config:
+                enabled: '{{ .Values.forceConfigFromValues }}'
+                mountPath: /app/config/widgets.yaml
+                objectName: config
+                readOnly: true
+                subPath: widgets.yaml
+                type: configmap
+            kubernetes-config:
+                enabled: true
+                mountPath: /app/config/kubernetes.yaml
+                objectName: config
+                readOnly: true
+                subPath: kubernetes.yaml
+                type: configmap
+            services-config:
+                enabled: '{{ not .Values.forceConfigFromValues }}'
+                mountPath: /dummy-config/services.yaml
+                objectName: config
+                readOnly: true
+                subPath: services.yaml
+                targetSelector:
+                    main: {}
+                type: configmap
+            settings-config:
+                enabled: '{{ not .Values.forceConfigFromValues }}'
+                mountPath: /dummy-config/settings.yaml
+                objectName: config
+                readOnly: true
+                subPath: settings.yaml
+                targetSelector:
+                    main: {}
+                type: configmap
+            widgets-config:
+                enabled: '{{ not .Values.forceConfigFromValues }}'
+                mountPath: /dummy-config/widgets.yaml
+                objectName: config
+                readOnly: true
+                subPath: widgets.yaml
+                targetSelector:
+                    main: {}
+                type: configmap
+        podOptions:
+            dnsConfig:
+                options:
+                    - name: ndots
+                      value: "3"
+        rbac:
+            main:
+                clusterWide: true
+                enabled: true
+                primary: true
+                rules:
+                    - apiGroups:
+                        - ""
+                      resources:
+                        - namespaces
+                        - pods
+                        - nodes
+                      verbs:
+                        - get
+                        - list
+                    - apiGroups:
+                        - extensions
+                        - networking.k8s.io
+                      resources:
+                        - ingresses
+                      verbs:
+                        - get
+                        - list
+                    - apiGroups:
+                        - traefik.containo.us
+                        - traefik.io
+                      resources:
+                        - ingressroutes
+                      verbs:
+                        - get
+                        - list
+                    - apiGroups:
+                        - metrics.k8s.io
+                      resources:
+                        - nodes
+                        - pods
+                      verbs:
+                        - get
+                        - list
+                    - apiGroups:
+                        - apiextensions.k8s.io
+                      resources:
+                        - customresourcedefinitions/status
+                      verbs:
+                        - get
+        release_name: homepage
+        resources: {}
+        securityContext:
+            container:
+                UMASK: "0022"
+                runAsGroup: 1000
+                runAsUser: 1000
+            pod:
+                fsGroup: 1000
+                fsGroupChangePolicy: OnRootMismatch
+        service:
+            main:
+                enabled: true
+                type: LoadBalancer
+                loadBalancerIP: ${HOMEPAGE_IP}
+                ports:
+                    main:
+                        port: 10352
+                        protocol: http
+                        targetPort: 3000
+        serviceAccount:
+            main:
+                enabled: true
+                primary: true
+        workload:
+            main:
+                podSpec:
+                    automountServiceAccountToken: true
+                    containers:
+                        main: {}
+                    initContainers:
+                        init-config:
+                            command:
+                                - /bin/sh
+                                - -c
+                                - |
+                                  mkdir -p /app/config
+                                  if [ ! -f /app/config/bookmarks.yaml ]; then
+                                    echo "Bookmarks file not found, copying dummy..."
+                                    cp /dummy-config/bookmarks.yaml /app/config/bookmarks.yaml
+                                    echo "Config file copied, you can now edit it at /app/config/bookmarks.yaml"
+                                  fi
+                                  if [ ! -f /app/config/services.yaml ]; then
+                                    echo "services file not found, copying dummy..."
+                                    cp /dummy-config/services.yaml /app/config/services.yaml
+                                    echo "Config file copied, you can now edit it at /app/config/services.yaml"
+                                  fi
+                                  if [ ! -f /app/config/settings.yaml ]; then
+                                    echo "settings file not found, copying dummy..."
+                                    cp /dummy-config/settings.yaml /app/config/settings.yaml
+                                    echo "Config file copied, you can now edit it at /app/config/settings.yaml"
+                                  fi
+                                  if [ ! -f /app/config/widgets.yaml ]; then
+                                    echo "widgets file not found, copying dummy..."
+                                    cp /dummy-config/widgets.yaml /app/config/widgets.yaml
+                                    echo "Config file copied, you can now edit it at /app/config/widgets.yaml"
+                                  fi
+                                  if [ ! -f /app/config/custom.css ]; then
+                                    echo "custom.css file not found, copying dummy..."
+                                    cp /dummy-config/custom.css /app/config/custom.css
+                                    echo "Config file copied, you can now edit it at /app/config/custom.css"
+                                  fi
+                                  if [ ! -f /app/config/custom.js ]; then
+                                    echo "custom.js file not found, copying dummy..."
+                                    cp /dummy-config/custom.js /app/config/custom.js
+                                    echo "Config file copied, you can now edit it at /app/config/custom.js"
+                                  fi
+                            enabled: true
+                            imageSelector: alpineImage
+                            type: init
+                replicas: 1
+                type: Deployment

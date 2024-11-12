@@ -1,0 +1,61 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: prowlarr
+    namespace: media
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: external-service
+            version: 15.2.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: prowlarr
+    values:
+        ingress:
+            main:
+                enabled: true   
+                hosts:
+                    - host: prowlarr.${BASE_DOMAIN}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    traefik:
+                        enabled: true
+                        middlewares:
+                            - name: local
+                              namespace: traefik
+                            - name: bouncer
+                              namespace: traefik
+                        entrypoints:
+                            - websecure
+                    certManager:
+                        enabled: true
+                        certificateIssuer: wethecommon-prod
+ #               tls:
+ #                   hosts:
+ #                       - host: prowlarr.${BASE_DOMAIN}
+ #                     secretName: prowlarr-tls
+        release_name: prowlarr
+        service:
+            main:
+                enabled: true
+                externalIP: 192.168.10.10
+                ports:
+                    main:
+                        enabled: true
+                        port: 9696
+                        protocol: http
+                type: ExternalIP
+                useSlice: false
+        workload:
+            main:
+                enabled: false
+                podSpec:
+                    containers:
+                        main: {}
