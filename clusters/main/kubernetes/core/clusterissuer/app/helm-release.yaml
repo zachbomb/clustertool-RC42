@@ -35,13 +35,13 @@ spec:
         enabled: true
         name: "selfsigned"
       ACME:
-        - name: wethecommon-staging
+        - name: wethecommon-0-le-staging
           enabled: true
           email: "${DOMAIN_0_EMAIL}"
           server: 'https://acme-staging-v02.api.letsencrypt.org/directory'
           type: "cloudflare"
           cfapitoken: "${DOMAIN_0_CLOUDFLARE_TOKEN}"
-        - name: wethecommon-prod
+        - name: wethecommon-0-le-prod
           enabled: true
           email: "${DOMAIN_0_EMAIL}"
           server: 'https://acme-v02.api.letsencrypt.org/directory'
@@ -56,7 +56,7 @@ spec:
       certificates:
         - name: wethecommon-wildcard
           enabled: true
-          certificateIssuer: wethecommon-prod
+          certificateIssuer: wethecommon-0-le-prod
           hosts:
             - ${DOMAIN_0}
             - '*.${DOMAIN_0}'
