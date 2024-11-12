@@ -34,7 +34,7 @@ spec:
     # and/or disable its service
     global:
       stopAll: false
-    defaultCertificate: wethecommon-wildcard
+    defaultCertificate: "wethecommon-wildcard"
     service:
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}
@@ -51,7 +51,7 @@ spec:
                 namespace: traefik
           certManager:
             enabled: true
-            certificateIssuer: wethecommon-0-le-prod
+            certificateIssuer: wethecommon-le-prod
 
         hosts:
           - host: traefik.${BASE_DOMAIN}
