@@ -77,7 +77,7 @@ spec:
                             - websecure
                     certManager:
                         enabled: true
-                        certificateIssuer: wethecommon-staging
+                        certificateIssuer: wethecommon-0-le-staging
                     homepage:
                         description: Movie Downloader/Manager
                         enabled: true
