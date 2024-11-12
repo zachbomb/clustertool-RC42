@@ -34,7 +34,7 @@ spec:
     # and/or disable its service
     global:
       stopAll: false
-    defaultCertificate: wethecommon-0-wildcard
+    defaultCertificate: wethecommon-wildcard
     service:
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}

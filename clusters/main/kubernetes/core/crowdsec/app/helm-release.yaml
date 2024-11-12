@@ -69,7 +69,7 @@ spec:
         ingress:
           enabled: false
           annotations:
-            cert-manager.io/cluster-issuer: wethecommon-0-le-prod
+            cert-manager.io/cluster-issuer: wethecommon-le-prod
             cert-manager.io/private-key-rotation-policy: Always
             meta.helm.sh/release-name: traefik
             meta.helm.sh/release-namespace: traefik

@@ -133,7 +133,7 @@ spec:
                             - websecure
                     certManager:
                         enabled: true
-                        certificateIssuer: wethecommon-prod
+                        certificateIssuer: wethecommon-le-prod
         persistence:
             bookmarks-config:
                 enabled: '{{ not .Values.forceConfigFromValues }}'

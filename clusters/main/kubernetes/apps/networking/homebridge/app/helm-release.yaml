@@ -39,7 +39,7 @@ spec:
               - websecure
           certManager:
             enabled: true
-            certificateIssuer: wethecommon-prod
+            certificateIssuer: wethecommon-le-prod
           homepage:
             enabled: false
     release_name: homebridge
