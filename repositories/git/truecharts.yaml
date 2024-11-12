@@ -8,6 +8,7 @@ metadata:
 spec:
   interval: 30m
   url: ssh://git@github.com/truecharts/public.git
+  timeout: 10m
   ref:
     branch: master
   secretRef:
