@@ -54,7 +54,7 @@ spec:
       # Accepts comma-separated regex expressions
       replicationNamespaces: '.*'
       certificates:
-        - name: wethecommon-wildcard
+        - name: wethecommon-0-wildcard
           enabled: true
           certificateIssuer: wethecommon-0-le-prod
           hosts:
