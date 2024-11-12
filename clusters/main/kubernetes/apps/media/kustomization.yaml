@@ -6,4 +6,3 @@ resources:
   #- media-nfs-pvc.yaml
   - roon/ks.yaml
   - prowlarr/ks.yaml
-  - radarr/ks.yaml
