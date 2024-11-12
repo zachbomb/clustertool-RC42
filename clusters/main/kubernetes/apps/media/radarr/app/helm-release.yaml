@@ -107,16 +107,6 @@ spec:
                     exportarr:
                         mountPath: /config
                         readOnly: true
-#                volsync:
-#                  - name: minio
-#                    type: restic
-#                    credentials: s3
-#                    dest:
-#                      cacheCapacity: 10Gi
-#                      enabled: true
-#                    src:
-#                      enabled: true
-#                      cacheCapacity: 10Gi
             data:
                 enabled: true
                 type: nfs
