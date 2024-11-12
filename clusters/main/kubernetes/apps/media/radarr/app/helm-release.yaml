@@ -53,41 +53,42 @@ spec:
             exportarr:
                enabled: false
 
-        ingress:
-            main:
+    ingress:
+        main:
+            enabled: true
+            hosts:
+              - host: radarr.${BASE_DOMAIN}
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              hosts:
+                - radarr.${BASE_DOMAIN}
+              secretName: radarr-tls
+            integrations:
+              traefik:
                 enabled: true
-                hosts:
-                    - host: radarr.${BASE_DOMAIN}
-                      paths:
-                        - path: /
-                          pathType: Prefix
-#                tls:
-#                    hosts:
-#                        - radarr.${BASE_DOMAIN}
-#                   secretName: radarr-tls
-                integrations:
-                    traefik:
-                        enabled: true
-                        middlewares:
-                            - name: local
-                              namespace: traefik
-                            - name: bouncer
-                              namespace: traefik
-                        entrypoints:
-                            - websecure
-                    certManager:
-                        enabled: true
-                        certificateIssuer: wethecommon-0-le-staging
-                    homepage:
-                        description: Movie Downloader/Manager
-                        enabled: true
-                        group: Content Management
-                        icon: ""
-                        name: Radarr
-                        widget:
-                            custom:
-                                key: c0a84c5da5804c47a146ea036e5b961d
-                            enabled: true
+                middlewares:
+                  - name: local
+                    namespace: traefik
+                  - name: bouncer
+                    namespace: traefik
+                entrypoints:
+                  - websecure
+              certManager:
+                enabled: true
+                certificateIssuer: wethecommon-0-le-staging
+    homepage:
+      description: Movie Downloader/Manager
+      enabled: true
+      group: Content Management
+      icon: ""
+      name: Radarr
+      widget:
+        custom:
+          key: c0a84c5da5804c47a146ea036e5b961d
+        enabled: true
+
         service:
             main:
                 enabled: true
@@ -99,7 +100,13 @@ spec:
 
         persistence:
             config:
-                size: 50Gi
+                enabled: true
+                targetSelector:
+                    main:
+                        mountPath: /config
+                    exportarr:
+                        mountPath: /config
+                        readOnly: true
                 volsync:
                   - name: minio
                     type: restic
