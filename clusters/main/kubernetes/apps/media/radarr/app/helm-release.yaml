@@ -78,7 +78,7 @@ spec:
                   certManager:
                     enabled: true
                     certificateIssuer: wethecommon-0-le-staging
-                    homepage:
+                  homepage:
                       description: Movie Downloader/Manager
                       enabled: true
                       group: Content Management
