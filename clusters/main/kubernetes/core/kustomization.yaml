@@ -8,4 +8,4 @@ resources:
   - system-upgrade-controller-plans/ks.yaml
   - traefik/ks.yaml
   - cloudflared/ks.yaml
-  - crowdsec/ks.yaml
+  #- crowdsec/ks.yaml
