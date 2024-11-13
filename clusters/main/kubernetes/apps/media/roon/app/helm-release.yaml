@@ -41,7 +41,7 @@ spec:
                             - websecure
                     certManager:
                         enabled: true
-                        certificateIssuer: wethecommon-le-prod
+                        certificateIssuer: wethecommon-prod-cert
                     homepage:
                         enabled: false
         release_name: roon

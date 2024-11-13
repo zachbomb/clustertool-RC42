@@ -36,7 +36,7 @@ spec:
                             - websecure
                     certManager:
                         enabled: true
-                        certificateIssuer: wethecommon-le-prod
+                        certificateIssuer: wethecommon-prod-cert
  #               tls:
  #                   hosts:
  #                       - host: prowlarr.${BASE_DOMAIN}
