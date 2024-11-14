@@ -61,7 +61,7 @@ spec:
             protocol: https
             proxyProtocol:
               enabled: false
-                insecureMode: false
+              insecureMode: false
           tls:
             enabled: true
         type: LoadBalancer
