@@ -37,7 +37,34 @@ spec:
     defaultCertificate: "wethecommon-wildcard-cert"
     service:
       tcp:
+        enabled: true
+        externalTrafficPolicy: Local
         loadBalancerIP: ${TRAEFIK_IP}
+        ports:
+          web:
+            enabled: true
+            forwardedHeaders:
+              enabled: false
+              insecureMode: false
+            port: 80
+            protocol: http
+            proxyProtocol:
+              enabled: false
+              insecureMode: false
+            redirectTo: websecure
+          websecure:
+            enabled: true
+            forwardedHeaders:
+              enabled: false
+              insecureMode: false
+            port: 443
+            protocol: https
+            proxyProtocol:
+              enabled: false
+                insecureMode: false
+          tls:
+            enabled: true
+        type: LoadBalancer
 #    ingress:
 #      main:
 #        enabled: false
