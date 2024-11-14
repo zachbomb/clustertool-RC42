@@ -36,6 +36,20 @@ spec:
       stopAll: false
     defaultCertificate: "wethecommon-wildcard-cert"
     service:
+      main:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: ${TRAEFIK-DASHBOARD_IP}
+        ports:
+          main:
+            enabled: true
+            forwardedHeaders:
+                enabled: false
+              port: 9000
+              protocol: http
+              proxyProtocol:
+                enabled: false
+              targetPort: 9000
       tcp:
         enabled: true
         externalTrafficPolicy: Local
