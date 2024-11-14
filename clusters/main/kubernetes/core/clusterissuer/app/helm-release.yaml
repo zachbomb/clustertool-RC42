@@ -50,13 +50,11 @@ spec:
 
     ## Remove these if you do NOT want to use clusterissuer
     clusterCertificates:
-      # Namespaces in which the certificates must be available
-      # Accepts comma-separated regex expressions
       replicationNamespaces: '.*'
       certificates:
         - name: wethecommon-wildcard-cert
           enabled: true
           certificateIssuer: wethecommon-prod-cert
           hosts:
-            - wethecommon.com
-            - '*.wethecommon.com'
+            - ${DOMAIN_0}
+            - '*.${DOMAIN_0}'
