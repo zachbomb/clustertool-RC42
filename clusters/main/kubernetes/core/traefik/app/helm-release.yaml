@@ -39,6 +39,7 @@ spec:
       tcp:
         enabled: true
         externalTrafficPolicy: Local
+        type: LoadBalancer
         loadBalancerIP: ${TRAEFIK_IP}
         ports:
           web:
@@ -64,7 +65,6 @@ spec:
               insecureMode: false
           tls:
             enabled: true
-        type: LoadBalancer
 #    ingress:
 #      main:
 #        enabled: false
