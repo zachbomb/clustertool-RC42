@@ -48,7 +48,6 @@ spec:
           type: "cloudflare"
           cfapitoken: "${DOMAIN_0_CLOUDFLARE_TOKEN}"
 
-    ## Remove these if you do NOT want to use clusterissuer
     clusterCertificates:
       replicationNamespaces: '.*'
       certificates:
