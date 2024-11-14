@@ -63,8 +63,6 @@ spec:
             proxyProtocol:
               enabled: false
               insecureMode: false
-          tls:
-            enabled: true
 #    ingress:
 #      main:
 #        enabled: false
