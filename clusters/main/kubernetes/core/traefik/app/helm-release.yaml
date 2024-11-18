@@ -156,6 +156,14 @@ spec:
                 pathType: Prefix
                 
     middlewares:
+      ipWhiteList:
+        - name: local
+          sourceRange:
+            - 172.16.0.0/16
+            - 172.17.0.0/16
+            - 192.168.10.0/24
+            - 192.168.20.0/24
+            - 192.168.30.0/24
       bouncer:
         - name: bouncer
           enabled: true
