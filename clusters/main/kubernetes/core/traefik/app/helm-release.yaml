@@ -77,26 +77,26 @@ spec:
             proxyProtocol:
               enabled: false
               insecureMode: false
-#    ingress:
-#      main:
-#        enabled: false
-#        integrations:
-#          traefik:
-#            enabled: true
-#           middlewares:
-#              - name: local
-#                namespace: traefik
-#              - name: bouncer
-#                namespace: traefik
-#          certManager:
-#            enabled: true
-#            certificateIssuer: wethecommon-prod-cert
-#
-#        hosts:
-#          - host: traefik.${BASE_DOMAIN}
-#            paths:
-#              - path: /
-#                pathType: Prefix
+    ingress:
+      main:
+        enabled: false
+        integrations:
+          traefik:
+            enabled: true
+           middlewares:
+              - name: local
+                namespace: traefik
+              - name: bouncer
+                namespace: traefik
+          certManager:
+            enabled: true
+            certificateIssuer: wethecommon-prod-cert
+
+        hosts:
+          - host: traefik.${BASE_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
                 
     middlewares:
       bouncer:
