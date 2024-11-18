@@ -84,10 +84,10 @@ spec:
             enabled: true
             forwardedHeaders:
                 enabled: false
-              port: 9000
-              protocol: http
-              proxyProtocol:
-                enabled: false
+            port: 9000
+            protocol: http
+            proxyProtocol:
+              enabled: false
               targetPort: 9000
       tcp:
         enabled: true
