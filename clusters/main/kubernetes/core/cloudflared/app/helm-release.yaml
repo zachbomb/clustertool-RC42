@@ -50,7 +50,7 @@ spec:
                                 - --no-autoupdate
                                 - run
                             env:
-                                TUNNEL_TOKEN: eyJhIjoiNWNmYzY1OTg3Y2Y4MTNkMDMzYWE2MjE4OWMyYjliNjYiLCJ0IjoiZWRhZGMzMmYtNTBkOC00NWMzLThhOWUtMzc1ZmNlZjhkY2EzIiwicyI6IllUVmlNelJoWm1ZdE5ETmlNUzAwTlRjMUxUazBNemt0TUROak9ETXhPVEEyWldZNCJ9
+                                TUNNEL_TOKEN: ${CLOUDFLARE_TOKEN}
                             probes:
                                 liveness:
                                     enabled: false
