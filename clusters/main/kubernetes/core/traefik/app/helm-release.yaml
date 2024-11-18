@@ -140,7 +140,7 @@ spec:
         integrations:
           traefik:
             enabled: true
-           middlewares:
+            middlewares:
               - name: local
                 namespace: traefik
               - name: bouncer
