@@ -45,7 +45,7 @@ spec:
           poll_without_inotify: true
       env:
         - name: PARSERS
-          value: "crowdsecurity/cri-logs crowdsecurity/whitelists"
+          value: "crowdsecurity/cri-logs"
         - name: COLLECTIONS
           value: "crowdsecurity/traefik"
         - name: DISABLE_PARSERS
@@ -60,7 +60,7 @@ spec:
         ingress:
           enabled: true
           annotations:
-            cert-manager.io/cluster-issuer: wethecommon-wildcard-cert
+            cert-manager.io/cluster-issuer: wethecommon-prod-cert
             cert-manager.io/private-key-rotation-policy: Always
             meta.helm.sh/release-name: traefik
             meta.helm.sh/release-namespace: traefik

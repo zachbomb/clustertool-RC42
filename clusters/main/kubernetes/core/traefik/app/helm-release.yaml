@@ -39,7 +39,7 @@ spec:
         format: common
       access:
         enabled: true
-    defaultCertificate: wethecommon-wildcard-cert
+    defaultCertificate: "wethecommon-wildcard-cert"
     persistence:
       crowdsec-bouncer-tls:
         enabled: '{{ if .Values.middlewares.bouncer }}true{{ else }}false{{ end }}'
@@ -89,7 +89,18 @@ spec:
         sniStrict: false
     service:
       main:
-        type: ClusterIP
+        enabled: true
+        loadBalancerIP: ${TRAEFIK_DASH_IP}
+        ports:
+          main:
+            forwardedHeaders:
+              enabled: false
+            port: 9000
+            protocol: http
+            proxyProtocol:
+              enabled: false
+            targetPort: 9000
+        type: LoadBalancer
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}
         externalTrafficPolicy: Local
