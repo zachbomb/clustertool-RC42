@@ -44,7 +44,7 @@ spec:
           poll_without_inotify: true
       env:
         - name: PARSERS
-          value: "crowdsecurity/cri-logs"
+          value: "crowdsecurity/cri-logs crowdsecurity/whitelists"
         - name: COLLECTIONS
           value: "crowdsecurity/traefik"
         - name: DISABLE_PARSERS
@@ -55,9 +55,9 @@ spec:
           enabled: true
     lapi:
       dashboard:
-        enabled: false
+        enabled: true
         ingress:
-          enabled: false
+          enabled: true
           annotations:
             cert-manager.io/cluster-issuer: wethecommon-wildcard-cert
             cert-manager.io/private-key-rotation-policy: Always
@@ -74,8 +74,6 @@ spec:
           value: "${CSKEY}"
         - name: ENROLL_INSTANCE_NAME
           value: "cluster"
-        - name: BOUNCER_KEY_traefik
-          value: "${CS_LAPI_KEY}"
       metrics:
         enabled: true
         serviceMonitor:
