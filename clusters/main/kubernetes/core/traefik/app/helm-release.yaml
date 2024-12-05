@@ -32,7 +32,7 @@ spec:
   values:
     global:
       stopAll: false
-    TZ:America/Los_Angeles
+    TZ: America/Los_Angeles
     logs:
       general:
         level: ERROR
@@ -103,23 +103,17 @@ spec:
             enabled: true
             port: 443
             protocol: https
-            # -- Configure (Forwarded Headers)[https://doc.traefik.io/traefik/routing/entrypoints/#forwarded-headers] Support
             forwardedHeaders:
               enabled: true
-              # -- List of trusted IP and CIDR references
               trustedIPs:
                 - 172.16.0.0/16
                 - 172.17.0.0/16
                 - 192.168.1.0/24
                 - 10.6.0.0/24
-              # -- Trust all forwarded headers
               insecureMode: false
-              # -- Configure (Proxy Protocol Headers)[https://doc.traefik.io/traefik/routing/entrypoints/#proxyprotocol] Support
             proxyProtocol:
               enabled: true
-              # -- Only IPs in trustedIPs will lead to remote client address replacement
               trustedIPs: []
-              # -- Trust every incoming connection
               insecureMode: false
     ingress:
       main:
