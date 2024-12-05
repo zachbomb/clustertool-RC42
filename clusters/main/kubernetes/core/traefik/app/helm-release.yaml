@@ -78,50 +78,36 @@ spec:
       main:
         type: ClusterIP
       tcp:
-        enabled: true
-        externalTrafficPolicy: Local
-        type: LoadBalancer
         loadBalancerIP: ${TRAEFIK_IP}
+        externalTrafficPolicy: Local
         ports:
           web:
             enabled: true
-            forwardedHeaders:
-              enabled: false
-              insecureMode: false
             port: 80
             protocol: http
-            proxyProtocol:
-              enabled: false
-              insecureMode: false
             redirectTo: websecure
           websecure:
             enabled: true
-            forwardedHeaders:
-              enabled: false
-              insecureMode: false
             port: 443
             protocol: https
-            proxyProtocol:
-              enabled: false
+            # -- Configure (Forwarded Headers)[https://doc.traefik.io/traefik/routing/entrypoints/#forwarded-headers] Support
+            forwardedHeaders:
+              enabled: true
+              # -- List of trusted IP and CIDR references
+              trustedIPs:
+                - 172.16.0.0/16
+                - 172.17.0.0/16
+                - 192.168.1.0/24
+                - 10.6.0.0/24
+              # -- Trust all forwarded headers
               insecureMode: false
-    tlsOptions:
-      default:
-        cipherSuites:
-          - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-          - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
-          - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-          - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
-          - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
-          - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
-          - TLS_AES_128_GCM_SHA256
-          - TLS_AES_256_GCM_SHA384
-          - TLS_CHACHA20_POLY1305_SHA256
-        curvePreferences:
-          - CurveP521
-          - CurveP384
-          - X25519
-        minVersion: VersionTLS12
-        sniStrict: false
+              # -- Configure (Proxy Protocol Headers)[https://doc.traefik.io/traefik/routing/entrypoints/#proxyprotocol] Support
+            proxyProtocol:
+              enabled: true
+              # -- Only IPs in trustedIPs will lead to remote client address replacement
+              trustedIPs: []
+              # -- Trust every incoming connection
+              insecureMode: false
     ingress:
       main:
         enabled: true
@@ -131,10 +117,6 @@ spec:
             middlewares:
               - name: local
                 namespace: traefik
-          certManager:
-            enabled: true
-            certificateIssuer: wethecommon-prod-cert
-
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
