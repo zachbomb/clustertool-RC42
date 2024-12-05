@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: crowdsec
-      version: 0.13.0
+      version: 0.15.0
       sourceRef:
         kind: HelmRepository
         name: crowdsec
@@ -41,35 +41,25 @@ spec:
         - namespace: traefik
           podName: traefik-*
           program: traefik
+          poll_without_inotify: true
       env:
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
         - name: COLLECTIONS
           value: "crowdsecurity/traefik"
-        - name: POLL_WITHOUT_INOTIFY
-          value: "true"
+        - name: DISABLE_PARSERS
+          value: "crowdsecurity/whitelists"
       metrics:
         enabled: true
         serviceMonitor:
           enabled: true
-      securityContext:
-        runAsNonRoot: true
-        capabilities:
-          drop:
-            - ALL
-        seccompProfile:
-          type: RuntimeDefault
-    service:
-      main:
-        enabled: true
-        loadBalancerIP: ${BLOCKY_IP}
     lapi:
       dashboard:
         enabled: false
         ingress:
           enabled: false
           annotations:
-            cert-manager.io/cluster-issuer: wethecommon-prod-cert
+            cert-manager.io/cluster-issuer: wethecommon-wildcard-cert
             cert-manager.io/private-key-rotation-policy: Always
             meta.helm.sh/release-name: traefik
             meta.helm.sh/release-namespace: traefik
