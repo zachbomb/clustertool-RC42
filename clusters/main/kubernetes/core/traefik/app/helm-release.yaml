@@ -35,11 +35,12 @@ spec:
     logs:
       general:
         level: ERROR
-        format: json
+        format: common
       access:
         enabled: true
         operator:
           register: true
+    defaultCertificate: "wethecommon-wildcard-cert"
     persistence:
       crowdsec-bouncer-tls:
         enabled: '{{ if .Values.middlewares.bouncer }}true{{ else }}false{{ end }}'
@@ -73,22 +74,9 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     global:
       stopAll: false
-    defaultCertificate: "wethecommon-wildcard-cert"
     service:
       main:
-        enabled: true
-        type: LoadBalancer
-        loadBalancerIP: ${TRAEFIK_IP}
-        ports:
-          main:
-            enabled: true
-            forwardedHeaders:
-                enabled: false
-            port: 9000
-            protocol: http
-            proxyProtocol:
-              enabled: false
-              targetPort: 9000
+        type: ClusterIP
       tcp:
         enabled: true
         externalTrafficPolicy: Local
@@ -143,8 +131,6 @@ spec:
             middlewares:
               - name: local
                 namespace: traefik
-              - name: bouncer
-                namespace: traefik
           certManager:
             enabled: true
             certificateIssuer: wethecommon-prod-cert
@@ -152,7 +138,9 @@ spec:
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
-              - path: /
+              - path: /dashboard
+                pathType: Prefix
+              - path: /api
                 pathType: Prefix
                 
     middlewares:
@@ -169,13 +157,11 @@ spec:
           enabled: true
           logLevel: INFO
           crowdsecMode: stream
+#          crowdsecLapiScheme: https
           crowdsecLapiHost: crowdsec-service.crowdsec:8080
+#          crowdsecLapiKey: ${CS_LAPI_KEY}
           forwardedHeadersTrustedIPs: []
-          clientTrustedIPs:
-            - 172.16.0.0/16
-            - 172.17.0.0/16
-            - 192.168.10.0/24
-            - 192.168.20.0/24
+          clientTrustedIPs: []
           crowdsecLapiTLSCertificateAuthorityFile: /etc/traefik/crowdsec-certs/ca.crt
           crowdsecLapiTLSCertificateBouncerFile: /etc/traefik/crowdsec-certs/tls.crt
           crowdsecLapiTLSCertificateBouncerKeyFile: /etc/traefik/crowdsec-certs/tls.key
