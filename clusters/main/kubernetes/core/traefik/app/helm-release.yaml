@@ -157,9 +157,9 @@ spec:
           enabled: true
           logLevel: INFO
           crowdsecMode: stream
-#          crowdsecLapiScheme: https
+          crowdsecLapiScheme: https
           crowdsecLapiHost: crowdsec-service.crowdsec:8080
-#          crowdsecLapiKey: ${CS_LAPI_KEY}
+          crowdsecLapiKey: ${CS_LAPI_KEY}
           forwardedHeadersTrustedIPs: []
           clientTrustedIPs: []
           crowdsecLapiTLSCertificateAuthorityFile: /etc/traefik/crowdsec-certs/ca.crt

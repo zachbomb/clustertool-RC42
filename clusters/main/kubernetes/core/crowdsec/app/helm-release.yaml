@@ -74,6 +74,8 @@ spec:
           value: "${CSKEY}"
         - name: ENROLL_INSTANCE_NAME
           value: "cluster"
+        - name: BOUNCER_KEY_traefik
+          value: "${CS_LAPI_KEY}"
       metrics:
         enabled: true
         serviceMonitor:
