@@ -129,7 +129,7 @@ spec:
                 tls:
                     - hosts:
                         - plex.${BASE_DOMAIN}
-                      clusterIssuer: cluster-cert
+                      clusterIssuer: wethecommon-wildcard-cert
         persistence:
             bookmarks-config:
                 enabled: '{{ not .Values.forceConfigFromValues }}'
