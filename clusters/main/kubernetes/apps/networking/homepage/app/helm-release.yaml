@@ -128,7 +128,7 @@ spec:
                     - host: homepage.${BASE_DOMAIN}
                 tls:
                     - hosts:
-                        - plex.${BASE_DOMAIN}
+                        - homepage.${BASE_DOMAIN}
                       clusterIssuer: wethecommon-wildcard-cert
         persistence:
             bookmarks-config:
