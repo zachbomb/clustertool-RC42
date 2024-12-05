@@ -30,17 +30,45 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    ## set stopAll to "true" if you do not want to use traefik
-    # and/or disable its service
+    global:
+      stopAll: false
+    TZ:America/Los_Angeles
     logs:
       general:
         level: ERROR
         format: common
       access:
         enabled: true
-        operator:
-          register: true
-    defaultCertificate: "wethecommon-wildcard-cert"
+    defaultCertificate: wethecommon-wildcard-cert
+    persistence:
+      crowdsec-bouncer-tls:
+        enabled: '{{ if .Values.middlewares.bouncer }}true{{ else }}false{{ end }}'
+        expandObjectName: false
+        mountPath: /etc/traefik/crowdsec-certs
+        objectName: crowdsec-bouncer-tls
+        type: secret
+      plugins:
+        enabled: true
+        mountPath: /plugins-storage
+        type: emptyDir
+    podOptions:
+      automountServiceAccountToken: true
+    portalhook:
+      enabled: true
+    providers:
+      kubernetesCRD:
+        enabled: true
+      kubernetesIngress:
+        enabled: true
+        publishedService:
+          enabled: true
+    securityContext:
+      container:
+        UMASK: "0022"
+        runAsGroup: 568
+        runAsUser: 568
+      pod:
+        fsGroupChangePolicy: OnRootMismatch
     tlsOptions:
       default:
         cipherSuites:
