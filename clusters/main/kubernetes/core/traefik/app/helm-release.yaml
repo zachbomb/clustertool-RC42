@@ -123,7 +123,7 @@ spec:
                 - 10.6.0.0/24
               insecureMode: false
             proxyProtocol:
-              enabled: true
+              enabled: false
               trustedIPs: []
               insecureMode: false
     ingress:

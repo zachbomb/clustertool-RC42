@@ -124,8 +124,6 @@ spec:
                               namespace: traefik
                             - name: bouncer
                               namespace: traefik
-                        entrypoints:
-                            - websecure
                 hosts:
                     - host: homepage.${BASE_DOMAIN}
                 tls:
