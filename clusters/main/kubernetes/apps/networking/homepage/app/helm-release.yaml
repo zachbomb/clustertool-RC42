@@ -121,7 +121,7 @@ spec:
                 tls:
                     - hosts:
                         - homepage.${BASE_DOMAIN}
-                      clusterIssuer: wethecommon-prod-cert
+                      secretName: homepage-tls
                 integrations:
                     traefik:
                         enabled: true
@@ -130,6 +130,9 @@ spec:
                               namespace: traefik
                             - name: bouncer
                               namespace: traefik
+                    certManager:
+                        enabled: true
+                        certificateIssuer: wethecommon-prod-cert
         persistence:
             bookmarks-config:
                 enabled: '{{ not .Values.forceConfigFromValues }}'
