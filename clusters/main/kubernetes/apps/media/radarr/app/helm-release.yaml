@@ -35,7 +35,7 @@ spec:
                 bucket: "${S3PREFIX}radarr"
                 accessKey: "${S3ID}"
                 secretKey: "${S3KEY}"
-                encrKey: "${S3EKEY}"
+                encrKey: "${S3KEY}"
         TZ: America/Los_Angeles
         securityContext:
             container:
@@ -135,14 +135,14 @@ spec:
             backup:
                 enabled: true
                 mountPath: /config/Backups
- #               volsync:
- #                 - name: minio
- #                   type: restic
- #                   credentials: s3
- #                   dest:
- #                     cacheCapacity: 10Gi
- #                     enabled: true
- #                   src:
- #                     enabled: true
- #                     cacheCapacity: 10Gi
+                volsync:
+                  - name: minio
+                    type: restic
+                    credentials: s3
+                    dest:
+                      cacheCapacity: 10Gi
+                      enabled: true
+                    src:
+                      enabled: true
+                      cacheCapacity: 10Gi
 
