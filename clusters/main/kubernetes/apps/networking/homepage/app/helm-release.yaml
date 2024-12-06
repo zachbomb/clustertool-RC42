@@ -116,6 +116,12 @@ spec:
         ingress:
             main:
                 enabled: true
+                hosts:
+                    - host: homepage.${BASE_DOMAIN}
+                tls:
+                    - hosts:
+                        - homepage.${BASE_DOMAIN}
+                      clusterIssuer: wethecommon-wildcard-cert
                 integrations:
                     traefik:
                         enabled: true
@@ -124,12 +130,6 @@ spec:
                               namespace: traefik
                             - name: bouncer
                               namespace: traefik
-                hosts:
-                    - host: homepage.${BASE_DOMAIN}
-                tls:
-                    - hosts:
-                        - homepage.${BASE_DOMAIN}
-                      clusterIssuer: wethecommon-wildcard-cert
         persistence:
             bookmarks-config:
                 enabled: '{{ not .Values.forceConfigFromValues }}'
