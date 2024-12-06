@@ -121,7 +121,7 @@ spec:
                 tls:
                     - hosts:
                         - homepage.${BASE_DOMAIN}
-                      clusterIssuer: wethecommon-wildcard-cert
+                      clusterIssuer: wethecommon-prod-cert
                 integrations:
                     traefik:
                         enabled: true
