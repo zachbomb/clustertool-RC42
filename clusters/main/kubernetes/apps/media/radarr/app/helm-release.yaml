@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: radarr
-      version: 23.12.0
+      version: 23.11.1
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -38,6 +38,7 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
+        
     securityContext:
       container:
         UMASK: "0022"
@@ -47,12 +48,47 @@ spec:
       pod:
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+    
     metrics:
       main:
         enabled: false
     workload:
       exportarr:
         enabled: false
+        
+    service:
+      main:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: ${RADARR_IP}
+        ports:
+          main:
+            port: 7878
+        
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: "radarr.${BASE_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          hosts:
+            - radarr.${BASE_DOMAIN}
+          secretName: radarr-tls
+        integrations:
+          traefik:
+            enabled: true
+            middlewares:
+              - name: local
+                namespace: traefik
+              - name: bouncer
+                namespace: traefik
+          certManager:
+            enabled: true
+            certificateIssuer: wethecommon-prod-cert
+        
     persistence:
       config:
         enabled: true
@@ -84,7 +120,7 @@ spec:
         enabled: true
         mountPath: /config/Backups
 #        volsync:
-#          - name: backup
+#          - name: b2
 #            type: restic
 #            credentials: s3
 #            dest:
@@ -93,34 +129,3 @@ spec:
 #            src:
 #              enabled: true
 #              cacheCapacity: 10Gi
-    ingress:
-      main:
-        enabled: true
-        hosts:
-          - host: "radarr.${BASE_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          hosts:
-            - radarr.${BASE_DOMAIN}
-          secretName: radarr-tls
-        integrations:
-          traefik:
-            enabled: true
-            middlewares:
-              - name: local
-                namespace: traefik
-              - name: bouncer
-                namespace: traefik
-          certManager:
-            enabled: true
-            certificateIssuer: wethecommon-prod-cert
-    service:
-      main:
-        enabled: true
-        type: LoadBalancer
-        loadBalancerIP: ${RADARR_IP}
-        ports:
-          main:
-            port: 7878
