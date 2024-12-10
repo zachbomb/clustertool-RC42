@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: radarr
-      version: 23.11.1
+      version: 23.12.0
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -27,8 +27,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    global:
-      stopAll: false
     TZ: America/Los_Angeles
     credentials:
       s3:
@@ -68,15 +66,6 @@ spec:
     ingress:
       main:
         enabled: true
-        hosts:
-          - host: "radarr.${BASE_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          hosts:
-            - radarr.${BASE_DOMAIN}
-          secretName: radarr-tls
         integrations:
           traefik:
             enabled: true
@@ -88,7 +77,15 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: wethecommon-prod-cert
-        
+        hosts:
+          - host: "radarr.${BASE_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+#        tls:
+#          hosts:
+#            - radarr.${BASE_DOMAIN}
+#          secretName: radarr-tls
     persistence:
       config:
         enabled: true
@@ -119,13 +116,13 @@ spec:
       backup:
         enabled: true
         mountPath: /config/Backups
-#        volsync:
-#          - name: b2
-#            type: restic
-#            credentials: s3
-#            dest:
-#              enabled: true
-#              cacheCapacity: 10Gi
-#            src:
-#              enabled: true
-#              cacheCapacity: 10Gi
+        volsync:
+          - name: b2
+            type: restic
+            credentials: s3
+            dest:
+              enabled: false
+              cacheCapacity: 10Gi
+            src:
+              enabled: true
+              cacheCapacity: 10Gi
