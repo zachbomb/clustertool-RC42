@@ -77,6 +77,16 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: wethecommon-prod-cert
+          homepage:
+            description: Movie Downloader/Manager
+            enabled: true
+            group: Content Management
+            icon: ""
+            name: Radarr
+            widget:
+             custom:
+               key: c0a84c5da5804c47a146ea036e5b961d
+              enabled: true
         hosts:
           - host: "radarr.${BASE_DOMAIN}"
             paths:
