@@ -21,7 +21,7 @@ spec:
             s3:
                 type: s3
                 url: "${S3URL}"
-                bucket: homepage-config
+                bucket: "${S3PREFIX}-homepage"
                 accessKey: "${S3ID}"
                 secretKey: "${S3KEY}"
                 encrKey: "${S3KEY}"
@@ -148,6 +148,16 @@ spec:
                 targetSelector:
                     main:
                         mountPath: /config
+                        volsync:
+                          - credentials: s3
+                            name: config
+                            type: restic
+                            dest:
+                                enabled: false
+                                cacheCapacity: 10Gi
+                            src:
+                                enabled: true
+                                cacheCapacity: 10Gi
             custom-css-config:
                 enabled: '{{ not .Values.forceConfigFromValues }}'
                 mountPath: /dummy-config/custom.css
