@@ -84,7 +84,7 @@ spec:
             icon: ""
             name: Radarr
             widget:
-             custom:
+              custom:
                key: c0a84c5da5804c47a146ea036e5b961d
               enabled: true
         hosts:
