@@ -92,6 +92,16 @@ spec:
         targetSelector:
           main:
             mountPath: /config
+            volsync:
+            - credentials: s3
+              dest:
+                enabled: false
+                cacheCapacity: 10Gi
+              name: config
+              src:
+                enabled: true
+                cacheCapacity: 10Gi
+              type: restic
           exportarr:
             mountPath: /config
             readOnly: true
@@ -120,6 +130,7 @@ spec:
           - credentials: s3
             dest:
               enabled: false
+              cacheCapacity: 10Gi
             name: backup
             src:
               enabled: true
