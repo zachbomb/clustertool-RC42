@@ -94,14 +94,14 @@ spec:
             mountPath: /config
             volsync:
             - credentials: s3
+              name: config
+              type: restic
               dest:
                 enabled: false
                 cacheCapacity: 10Gi
-              name: config
               src:
                 enabled: true
                 cacheCapacity: 10Gi
-              type: restic
           exportarr:
             mountPath: /config
             readOnly: true
@@ -128,12 +128,12 @@ spec:
         mountPath: /config/Backups
         volsync:
           - credentials: s3
+            name: backup
+            type: restic
             dest:
               enabled: false
               cacheCapacity: 10Gi
-            name: backup
             src:
               enabled: true
               cacheCapacity: 10Gi
-            type: restic
-
+            
