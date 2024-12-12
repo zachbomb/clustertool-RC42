@@ -75,7 +75,7 @@ spec:
                 type: nfs
                 path: /mnt/Pibbs-Horde/media/data/app_backups/NZBGet_Backups/config
                 server: 192.168.10.123
-                mountPath: /data
+                mountPath: /config
                 mountOptions:
                  - nfsvers=4
                  - tcp
