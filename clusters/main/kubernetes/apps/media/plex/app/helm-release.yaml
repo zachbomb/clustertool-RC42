@@ -172,7 +172,7 @@ spec:
             additionalAdvertiseURL: ""
             disableGDM: false
             requireHTTPS: false
-            serverIP: ${PLEX_IP}
+            serverIP: 192.168.10.177
         release_name: plex
   #      resources:
   #          limits:
