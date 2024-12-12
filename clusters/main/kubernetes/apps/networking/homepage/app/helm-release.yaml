@@ -116,12 +116,6 @@ spec:
         ingress:
             main:
                 enabled: true
-                hosts:
-                    - host: homepage.${BASE_DOMAIN}
-                tls:
-                    - hosts:
-                        - homepage.${BASE_DOMAIN}
-                      secretName: homepage-tls
                 integrations:
                     traefik:
                         enabled: true
@@ -133,6 +127,12 @@ spec:
                     certManager:
                         enabled: true
                         certificateIssuer: wethecommon-prod-cert
+                hosts:
+                    - host: homepage.${BASE_DOMAIN}
+#                tls:
+#                    - hosts:
+#                        - homepage.${BASE_DOMAIN}
+#                      secretName: homepage-tls
         persistence:
             bookmarks-config:
                 enabled: '{{ not .Values.forceConfigFromValues }}'
@@ -145,7 +145,7 @@ spec:
                 type: configmap
             config:
                 enabled: true
-                targetSelector:
+                readOnly: false
                     main:
                         mountPath: /config
                         volsync:
