@@ -80,7 +80,7 @@ spec:
             config:
                 enabled: true
                 type: nfs
-                path: /mnt/Pibbs-Horde/media/data/app_backups/SABNzbd-Backups/config
+                path: /mnt/Pibbs-Horde/media/data/app_backups/SABNzbd_Backups/config
                 server: 192.168.10.123
                 mountPath: /config
                 mountOptions:
