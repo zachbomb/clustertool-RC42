@@ -1,0 +1,169 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.zinn.ca/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: sonarr
+    namespace: media
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: sonarr
+            version: 23.3.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+    releaseName: sonarr
+    values:
+        credentials:
+            s3:
+                type: s3
+                url: "${S3URL}"
+                bucket: "${S3PREFIX}-sonarr"
+                accessKey: "${S3ID}"
+                secretKey: "${S3KEY}"
+                encrKey: "${S3KEY}"
+        TZ: America/Los_Angeles
+        addons:
+            codeserver:
+                enabled: false
+            netshoot:
+                enabled: false
+            vpn:
+                type: disabled
+        exportarrImage:
+            pullPolicy: IfNotPresent
+            repository: ghcr.io/onedr0p/exportarr
+            tag: v2.0.1@sha256:727e7bc8f2f0934a2117978c59f4476b954018b849a010ea6cfb380bd6539644
+        ingress:
+            main:
+                enabled: true
+                integrations:
+                    traefik:
+                        enabled: true
+                        middlewares:
+                         - name: local
+                           namespace: traefik
+                         - name: bouncer
+                           namespace: traefik
+                    certManager:
+                        certificateIssuer: wethecommon-prod-cert
+                        enabled: true
+                    homepage:
+                        description: TV Downloader/Manager
+                        enabled: true
+                        group: Content Management
+                        icon: ""
+                        name: Sonarr
+                        widget:
+                            custom:
+                                key: b8c72124548a4b4ea50a698c6a2b0391
+                            enabled: true
+
+                hosts:
+                    - host: "sonarr.${BASE_DOMAIN}"
+                      paths:
+                        - path: /
+                          pathType: Prefix
+        metrics:
+            main:
+                enabled: false
+                endpoints:
+                    - path: /metrics
+                      port: metrics
+                prometheusRule:
+                    enabled: false
+                targetSelector: metrics
+                type: servicemonitor
+        persistence:
+            config:
+                enabled: true
+                readOnly: false
+                main:
+                    mountPath: /config
+                    volsync:
+                     - name: config
+                       type: restic
+                       credentials: s3
+                       dest:
+                         enabled: true
+                         cacheCapacity: 100Gi
+                       src:
+                         enabled: true
+                         cacheCapacity: 100Gi
+            data:
+                enabled: true
+                type: nfs
+                path: /mnt/Pibbs-Horde/media/data
+                server: 192.168.10.123
+                mountPath: /data
+                mountOptions:
+                 - nfsvers=4
+                 - tcp
+                 - intr
+                 - hard
+                 - noatime
+                 - nodiratime
+                 - nolock
+            tv:
+                enabled: true
+                type: nfs
+                path: /mnt/Pibbs-Horde/media/data/media/tv
+                server: 192.168.10.123
+                mountPath: /tv
+                mountOptions:
+                 - nfsvers=4
+                 - tcp
+                 - intr
+                 - hard
+                 - noatime
+                 - nodiratime
+                 - nolock
+            downloads:
+                enabled: true
+                type: nfs
+                path: /mnt/Pibbs-Horde/media/data/usenet
+                server: 192.168.10.123
+                mountPath: /usenet
+                mountOptions:
+                 - nfsvers=4
+                 - tcp
+                 - intr
+                 - hard
+                 - noatime
+                 - nodiratime
+                 - nolock
+            backup:
+                enabled: true
+                mountPath: /config/Backups
+                volsync:
+                    - name: b2
+                      type: restic
+                      credentials: s3
+                      dest:
+                        cacheCapacity: 10Gi
+                        enabled: true
+                      src:
+                        enabled: true
+                        cacheCapacity: 10Gi
+        release_name: sonarr
+        resources: {}
+        securityContext:
+            container:
+                UMASK: "0022"
+                runAsGroup: 1000
+                runAsUser: 1000
+            pod:
+                fsGroup: 1000
+                fsGroupChangePolicy: OnRootMismatch
+        service:
+            main:
+                enabled: true
+                loadBalancerIP: ${SONARR_IP}
+                ports:
+                    main:
+                        port: 8989
+                type: LoadBalancer
+
