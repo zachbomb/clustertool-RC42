@@ -72,30 +72,18 @@ spec:
             config:
                 enabled: true
                 readOnly: false
-                type: nfs
-                path: /mnt/Pibbs-Horde/media/data/app_backups/NZBGet_Backups/config
-                server: 192.168.10.123
-                mountPath: /config
-                mountOptions:
-                 - nfsvers=4
-                 - tcp
-                 - intr
-                 - hard
-                 - noatime
-                 - nodiratime
-                 - nolock
- #               main:
- #                   mountPath: /config
- #                   volsync:
- #                    - name: config
-#                       type: restic
-#                       credentials: s3
-#                       dest:
-#                         enabled: true
-#                         cacheCapacity: 100Gi
-#                       src:
-#                         enabled: true
-#                         cacheCapacity: 100Gi
+                main:
+                    mountPath: /config
+                    volsync:
+                     - name: config
+                       type: restic
+                       credentials: s3
+                       dest:
+                         enabled: true
+                         cacheCapacity: 100Gi
+                       src:
+                         enabled: true
+                         cacheCapacity: 100Gi
             data:
                 enabled: true
                 type: nfs
