@@ -79,19 +79,31 @@ spec:
         persistence:
             config:
                 enabled: true
-                readOnly: false
-                main:
-                    mountPath: /config
-                    volsync:
-                     - name: config
-                       type: restic
-                       credentials: s3
-                       dest:
-                         enabled: true
-                         cacheCapacity: 100Gi
-                       src:
-                         enabled: true
-                         cacheCapacity: 100Gi
+                type: nfs
+                path: /mnt/Pibbs-Horde/media/data/app_backups_SABNzbd-Bakcups/config
+                server: 192.168.10.123
+                mountPath: /config
+                mountOptions:
+                 - nfsvers=4
+                 - tcp
+                 - intr
+                 - hard
+                 - noatime
+                 - nodiratime
+                 - nolock
+ #               readOnly: false
+ #               main:
+ #                   mountPath: /config
+ #                   volsync:
+#                     - name: config
+#                       type: restic
+#                       credentials: s3
+#                       dest:
+#                         enabled: true
+#                         cacheCapacity: 100Gi
+#                       src:
+#                         enabled: true
+#                         cacheCapacity: 100Gi
             data:
                 enabled: true
                 type: nfs
