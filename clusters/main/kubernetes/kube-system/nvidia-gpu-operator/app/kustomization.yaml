@@ -4,4 +4,3 @@ resources:
   - runtime.yaml
   - namespace.yaml
   - helm-release.yaml
-  - dp-config.yaml
