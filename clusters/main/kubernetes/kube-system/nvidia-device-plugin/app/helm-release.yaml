@@ -1,9 +1,8 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: nvidia-gpu-operator
-  namespace: nvidia
+  namespace: nvidia-device-plugin
 spec:
   interval: 15m
   chart:
@@ -12,7 +11,7 @@ spec:
       version: 0.17.0
       sourceRef:
         kind: HelmRepository
-        name: nvidia
+        name: nvdp
         namespace: flux-system
   install:
     remediation:
@@ -46,3 +45,4 @@ spec:
               resources:
                 - name: nvidia.com/gpu
                   replicas: 4
+

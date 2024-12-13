@@ -30,4 +30,4 @@ resources:
   - truecharts.yaml
 # more goes here!
   - crowdsec.yaml
-  - nvidia-dvp.yaml
+  - nvdp.yaml
