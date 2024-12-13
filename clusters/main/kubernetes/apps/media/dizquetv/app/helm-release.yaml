@@ -133,7 +133,7 @@ spec:
         release_name: dizquetv
         resources:
             limits:
-                nvidia.com/gpu: 1
+                gpu.intel.com/i915: 1
         securityContext:
             container:
                 PUID: 1000
