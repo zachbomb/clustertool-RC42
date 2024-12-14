@@ -31,12 +31,12 @@ spec:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: feature.node.kubernetes.io/pci-0300_10de.present
-                  operator: In
-                  values:
-                    - "true"
+#          nodeSelectorTerms:
+#            - matchExpressions:
+#                - key: feature.node.kubernetes.io/pci-0300_10de.present
+#                  operator: In
+#                  values:
+#                    - "true"
     config:
       map:
         default: |-
@@ -51,7 +51,7 @@ spec:
                 - name: nvidia.com/gpu
                   replicas: 5
       gfd:
-        enabled: true
-      driver:
         enabled: false
-      runtimeClassName: nvidia
+      driver:
+        enabled: true
+
