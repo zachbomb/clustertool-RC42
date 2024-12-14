@@ -5,3 +5,4 @@ metadata:
   name: nvidia-device-plugin
   labels:
     pod-security.kubernetes.io/enforce: privileged
+
