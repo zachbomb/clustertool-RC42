@@ -27,13 +27,6 @@ spec:
                 secretKey: "${S3KEY}"
                 encrKey: "${S3KEY}"
         TZ: America/Los_Angeles
-        addons:
-            codeserver:
-                enabled: false
-            netshoot:
-                enabled: false
-            vpn:
-                type: disabled
         ingress:
             main:
                 enabled: true
@@ -61,13 +54,8 @@ spec:
                         name: NZBget
                         widget:
                             custom:
-                                key: ""
-                            customkv:
-                                - key: username
-                                  value: zach
-                                - key: password
-                                  value: WZM-jvt1fxq*njk1qak
-                            enabled: true
+                                username: zach
+                                password:WZM-jvt1fxq*njk1qak
 
         persistence:
             config:
