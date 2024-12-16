@@ -28,8 +28,6 @@ spec:
       gfd:
         enabled: true
         nodefeaturerules: true
-      driver:
-        enabled: false
       runtimeClassName: nvidia
       sharing:
         timeSlicing:
