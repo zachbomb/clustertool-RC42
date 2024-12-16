@@ -59,6 +59,7 @@ spec:
                         name: SabNZBD
                         widget:
                             custom:
+                                url: http://172.17.246.220
                                 key: t9t500obl7q793q1nse3jftag6xx2347
                             enabled: true
 
