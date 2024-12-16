@@ -27,7 +27,7 @@ spec:
         enabled: true
         nodefeaturerules: true
       driver:
-        enabled: false
+        enabled: true
       runtimeClassName: nvidia
       sharing:
         timeSlicing:
