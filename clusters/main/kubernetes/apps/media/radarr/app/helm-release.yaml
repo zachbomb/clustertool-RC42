@@ -100,7 +100,7 @@ spec:
       config:
         enabled: true
         readOnly: false
-          main:
+        main:
             mountPath: /config
             volsync:
              - credentials: s3
