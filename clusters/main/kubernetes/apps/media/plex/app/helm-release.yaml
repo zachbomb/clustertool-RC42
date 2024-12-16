@@ -39,6 +39,7 @@ spec:
                 secretKey: "${S3KEY}"
                 encrKey: "${S3KEY}"
         TZ: America/Los_Angeles
+        runtimeClassName: "nvidia"
         ingress:
             main:
                 enabled: true
