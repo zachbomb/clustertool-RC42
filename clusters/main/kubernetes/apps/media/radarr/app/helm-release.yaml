@@ -103,8 +103,8 @@ spec:
         main:
             mountPath: /config
             volsync:
-             - credentials: s3
-               name: config
+             - name: config
+               credentials: s3
                type: restic
                dest:
                  enabled: true
