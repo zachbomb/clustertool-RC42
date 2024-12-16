@@ -4,3 +4,4 @@ resources:
   - runtime.yaml
   - namespace.yaml
   - helm-release.yaml
+  - time-slicing-config-all.yaml
