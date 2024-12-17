@@ -48,8 +48,9 @@ spec:
                         icon: ""
                         name: Overseerr
                         widget:
-                            custom:
-                                key:  MTczNDM5Mjc3ODUxNGVjYzE3ZTY2LTJlZWYtNDZiMi1hYzkxLTFiZTljZjkwOTgzOQ==
+                            type: overseerr
+                            url: http://192.168.10.184
+                            key:  MTczNDM5Mjc3ODUxNGVjYzE3ZTY2LTJlZWYtNDZiMi1hYzkxLTFiZTljZjkwOTgzOQ==
                             enabled: true
                 hosts:
                     - host: "overseerr.${BASE_DOMAIN}"
