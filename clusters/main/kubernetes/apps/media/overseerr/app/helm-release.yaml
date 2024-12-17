@@ -49,7 +49,7 @@ spec:
                         name: Overseerr
                         widget:
                             type: overseerr
-                             url: https://overseerr.sf.wethecommon.com
+                             url: https://overseerr.sf.wethecommon.com/
                              key: MTczNDM5Mjc3ODUxNGVjYzE3ZTY2LTJlZWYtNDZiMi1hYzkxLTFiZTljZjkwOTgzOQ==
                             enabled: true
                 hosts:
