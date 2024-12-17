@@ -49,7 +49,7 @@ spec:
                         name: Overseerr
                         widget:
                             custom:
-                                key: MTcxMjk0OTY2NTcwOWU1NGRkODg3LTA3NTQtNDkyYS04YWQ1LWY1Y2I1NjgxNjBiYw==
+                                key: MTczNDM5Mjc3ODUxNGVjYzE3ZTY2LTJlZWYtNDZiMi1hYzkxLTFiZTljZjkwOTgzOQ==
                             enabled: true
                 hosts:
                     - host: "overseerr.${BASE_DOMAIN}"
