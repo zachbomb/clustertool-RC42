@@ -55,7 +55,7 @@ spec:
                         widget:
                             custom:
                                 username: zach
-                                password:WZM-jvt1fxq*njk1qak
+                                password: WZM-jvt1fxq*njk1qak
 
         persistence:
             config:
