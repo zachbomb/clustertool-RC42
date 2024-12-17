@@ -23,7 +23,7 @@ spec:
                 hosts:
                     - host: homeassistant.${BASE_DOMAIN}
                       paths:
-                        - path: /
+                        - path: /lovelace/0
                           pathType: Prefix
 #                tls:
 #                    hosts:
