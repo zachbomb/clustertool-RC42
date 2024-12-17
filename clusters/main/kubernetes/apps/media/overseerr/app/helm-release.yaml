@@ -59,7 +59,7 @@ spec:
         service:
             main:
                 enabled: true
-                loadBalancerIP: ${OVERSEER_IP}
+                loadBalancerIP: ${OVERSEERR_IP}
                 ports:
                     main:
                         port: 5055
