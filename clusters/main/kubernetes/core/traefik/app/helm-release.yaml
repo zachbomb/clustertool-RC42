@@ -201,6 +201,8 @@ spec:
               #forwardedHeadersCustomName: X-Forwarded-For
           clientTrustedIPs:
             - 192.168.10.0/24
+            - 192.168.3.0/24
+            - 192.168.9.0/24
           crowdsecLapiTLSCertificateAuthorityFile: /etc/traefik/crowdsec-certs/ca.crt
           crowdsecLapiTLSCertificateBouncerFile: /etc/traefik/crowdsec-certs/tls.crt
           crowdsecLapiTLSCertificateBouncerKeyFile: /etc/traefik/crowdsec-certs/tls.key

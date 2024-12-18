@@ -48,8 +48,8 @@ spec:
                         icon: ""
                         name: Overseerr
                         widget:
-                            type: overseerr
-                             url: http://192.168.10.184:5055
+                            overseerr:
+                             url: http://192.168.10.184:10057
                              key: MTczNDM5Mjc3ODUxNGVjYzE3ZTY2LTJlZWYtNDZiMi1hYzkxLTFiZTljZjkwOTgzOQ==
                             enabled: true
                 hosts:
