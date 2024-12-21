@@ -175,9 +175,9 @@ spec:
             requireHTTPS: false
             serverIP: 192.168.10.177
         release_name: plex
-        resources:
-            limits:
-                nvidia.com/gpu: 1
+#        resources:
+#            limits:
+#                nvidia.com/gpu: 1
         securityContext:
             container:
                 UMASK: "0022"
