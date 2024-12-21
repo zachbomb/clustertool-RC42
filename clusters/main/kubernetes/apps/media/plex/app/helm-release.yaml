@@ -81,10 +81,10 @@ spec:
                          type: restic
                          credentials: s3
                          dest:
-                           enabled: true
+                           enabled: false
                            cacheCapacity: 100Gi
                          src:
-                           enabled: false
+                           enabled: true
                            cacheCapacity: 100Gi
             data:
                 enabled: true
