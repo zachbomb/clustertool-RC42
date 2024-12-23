@@ -29,5 +29,3 @@ resources:
   - topolvm.yaml
   - truecharts.yaml
 # more goes here!
-  - crowdsec.yaml
-  - nvdp.yaml

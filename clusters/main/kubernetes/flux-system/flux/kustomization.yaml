@@ -9,5 +9,3 @@ resources:
   - ./upgradesettings.yaml
   - ./namespace.yaml
   # - sopssecret.secret.yaml
-  - receiver.yaml
-  - webhook.yaml
