@@ -77,15 +77,15 @@ spec:
                 main:
                   mountPath: /config
                   volsync:
-                     - name: config
-                       type: restic
-                       credentials: s3
-                       dest:
-                         enabled: true
-                         cacheCapacity: 100Gi
-                       src:
-                         enabled: true
-                         cacheCapacity: 100Gi
+                  - name: config
+                    credentials: s3
+                    type: restic
+                    dest:
+                      enabled: true
+                      cacheCapacity: 100Gi
+                    src:
+                      enabled: true
+                      cacheCapacity: 100Gi
 
             data:
                 enabled: false
