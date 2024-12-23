@@ -169,10 +169,6 @@ spec:
                 pathType: Prefix
               - path: /api
                 pathType: Prefix
-        ingressClass:
-            enabled: false
-            fallbackApiVersion: ""
-            isDefaultClass: false
         ingressRoute:
             dashboard:
                 enabled: true

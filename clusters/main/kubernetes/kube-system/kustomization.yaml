@@ -5,7 +5,7 @@ resources:
   - intel-device-plugins/ks.yaml
   - kubeapps/ks.yaml
   - nvidia-device-plugin/ks.yaml
-  - nvidia-gpu-operator/ks.yaml
+  #- nvidia-gpu-operator/ks.yaml
   - cilium/ks.yaml
   - descheduler/ks.yaml
   - kubelet-csr-approver/ks.yaml
