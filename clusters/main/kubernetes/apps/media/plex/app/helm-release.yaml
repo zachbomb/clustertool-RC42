@@ -77,7 +77,7 @@ spec:
                 main:
                     mountPath: /config
 #                    volsync:
-#                       - name: b2
+#                       - name: config
 #                        type: restic
 #                         credentials: s3
 #                         dest:
@@ -87,7 +87,7 @@ spec:
 #                           enabled: true
 #                           cacheCapacity: 100Gi
             data:
-                enabled: true
+                enabled: false
                 type: nfs
                 path: /mnt/Pibbs-Horde/media/data
                 server: 192.168.10.123
