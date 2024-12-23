@@ -4,3 +4,4 @@ resources:
   - runtime.yaml
   - namespace.yaml
   - helm-release.yaml
+  - runtimeclass.yaml
