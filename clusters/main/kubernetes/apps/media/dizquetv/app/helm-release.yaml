@@ -10,7 +10,7 @@ spec:
     chart:
         spec:
             chart: dizquetv
-            version: 16.2.4
+            version: 16.4.0
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
@@ -58,7 +58,7 @@ spec:
         nvidiaImage:
             pullPolicy: IfNotPresent
             repository: vexorian/dizquetv
-            tag: 1.5.3-nvidia@sha256:883f5ebc532acfdd64aed8ee89d53ac81794edb49bbb2adfca5b274ff37ae389
+            tag: 1.5.3-nvidia@sha256:13ef8f5edac31c8a916433c8bc9cda02d339f0eb65260dec6b08a9d8888f1eeb
         persistence:
             config:
                 enabled: true
