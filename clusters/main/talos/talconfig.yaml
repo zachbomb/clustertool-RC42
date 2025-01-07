@@ -43,7 +43,7 @@ nodes:
 controlPlane:
     patches:
         - '@./patches/controlplane.yaml'
-        - '@./patches/nvidia.yaml'
+        - '@./patches/gpu.yaml'
     kernelModules:
      - name: nvme_tcp
      - name: vfio_pci
@@ -93,7 +93,7 @@ controlPlane:
 worker:
     patches:
         - '@./patches/worker.yaml'
-        - '@./patches/nvidia.yaml'
+        - '@./patches/gpu.yaml'
     kernelModules:
      - name: nvme_tcp
      - name: vfio_pci
