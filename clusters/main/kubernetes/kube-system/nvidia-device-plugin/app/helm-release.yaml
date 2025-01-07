@@ -7,6 +7,7 @@ spec:
     interval: 5m
     chart:
         spec:
+            renovate: registryUrl=https://charts.truechartsoci.org
             chart: nvidia-device-plugin
             version:  0.17.0
             sourceRef:
@@ -20,29 +21,14 @@ spec:
         remediation:
             retries: 3
     upgrade:
-        cleanupOnFail: true
+        crds: CreateReplace
         remediation:
-          strategy: rollback
-          retries: 3
+            retries: 3
     values:
       image:
         repository: nvcr.io/nvidia/k8s-device-plugin
         tag: v0.17.0
       runtimeClassName: nvidia
-    #  affinity:
-    #    nodeAffinity:
-    #      requiredDuringSchedulingIgnoredDuringExecution:
-    #        nodeSelectorTerms:
-    #          - matchExpressions:
-   #               - key: feature.node.kubernetes.io/pci-0300_10de.present
-   #                 operator: In
-    #                values:
-    #                  - "true"
-      #        - matchExpressions:
-      #            - key: feature.node.kubernetes.io/pci-0300_1b36.present
-      #              operator: In
-      #              values:
-      #                - "true"
       config:
         map:
           default: |-
@@ -58,4 +44,3 @@ spec:
                     replicas: 5
       gfd:
         enabled: true
-      
