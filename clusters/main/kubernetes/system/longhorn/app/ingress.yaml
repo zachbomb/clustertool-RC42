@@ -4,7 +4,7 @@ metadata:
   name: longhorn-dashboard
   namespace: longhorn-system
   annotations:
-      cert-manager.io/cluster-issuer: cluster-cert
+      cert-manager.io/cluster-issuer: wethecommon-prod-cert
       cert-manager.io/private-key-rotation-policy: Always
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.middlewares: traefik-chain-basic@kubernetescrd
