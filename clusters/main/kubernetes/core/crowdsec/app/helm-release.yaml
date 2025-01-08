@@ -37,6 +37,11 @@ spec:
       bouncer:
         reflector:
           namespaces: ["traefik"]
+    service:
+      main:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: ${CROWDSEC_IP}
     agent:
       acquisition:
         - namespace: traefik
@@ -68,11 +73,6 @@ spec:
             traefik.ingress.kubernetes.io/router.tls: 'true'
             traefik.ingress.kubernetes.io/router.middlewares: traefik-chain-basic@kubernetescrd,traefik-bouncer@kubernetescrd,traefik-local@kubernetescrd
           host: crowdsec.${BASE_DOMAIN}
-        service:
-          main:
-            enabled: true
-            type: LoadBalancer
-            loadBalancerIP: ${CROWDSEC_IP}
       env:
         - name: DISABLE_ONLINE_API
           value: "false"
