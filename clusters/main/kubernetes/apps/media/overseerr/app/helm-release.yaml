@@ -49,7 +49,7 @@ spec:
                         name: Overseerr
                         widget:
                             overseerr:
-                             url: http://192.168.10.184:10057/
+                             url: https://overseer.sf.wethecommon.com
                              key: MTczNDk5MTU3MjY5NWU4NDJhYjcyLWIyYzUtNDI3OS05YmE1LTdlNmZiMmU3NTMxNA==
                             enabled: true
                 hosts:
