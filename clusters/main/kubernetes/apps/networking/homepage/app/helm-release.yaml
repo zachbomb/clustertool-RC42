@@ -119,8 +119,8 @@ spec:
                     mountPath: /config
                     volsync:
                         - name: config
-                          credentials: s3
                           type: restic
+                          credentials: s3
                           dest:
                             enabled: true
                             cacheCapacity: 10Gi
