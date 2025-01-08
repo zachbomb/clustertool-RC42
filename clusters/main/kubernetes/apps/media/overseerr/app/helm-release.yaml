@@ -49,7 +49,7 @@ spec:
                         name: Overseerr
                         widget:
                             custom:
-                              url: http://192.168.10.184
+                              url: http://192.168.10.184:5055
                               key: MTczNjMyNDAxNjE5MGMzMThjZDQ1LWRiNmUtNGFkZC1hMDM3LWEwM2FiMzg2ZDdkYQ==
                             enabled: true
                 hosts:
