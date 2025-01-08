@@ -48,7 +48,7 @@ spec:
                         name: Emby
                         widget:
                             custom:
-                                key: 8e688e86ab9d4492a8c21ee6480891a7
+                                key: 10ec9bcd842045d6988cebab0bedc6fc
                             enabled: true
                 hosts:
                     - host: "emby.${BASE_DOMAIN}"

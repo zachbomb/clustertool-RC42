@@ -80,7 +80,7 @@ spec:
           homepage:
             description: Movie Downloader/Manager
             enabled: true
-            group: *rrs
+            group: -*rrs
             icon: ""
             name: Radarr
             widget:

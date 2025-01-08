@@ -55,7 +55,7 @@ spec:
                     homepage:
                         description: TV Downloader/Manager
                         enabled: true
-                        group: *rrs
+                        group: -*rrs
                         icon: ""
                         name: Sonarr
                         widget:
