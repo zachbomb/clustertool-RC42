@@ -54,7 +54,7 @@ spec:
                     homepage:
                         description: Music Management/Downloader
                         enabled: true
-                        group: Content Management
+                        group: *rrs
                         icon: ""
                         name: Lidarr
                         widget:
