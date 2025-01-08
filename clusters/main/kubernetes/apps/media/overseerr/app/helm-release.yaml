@@ -50,7 +50,7 @@ spec:
                         widget:
                             overseerr:
                              url: http://192.168.10.184:10057
-                             key: MTczNDM5Mjc3ODUxNGVjYzE3ZTY2LTJlZWYtNDZiMi1hYzkxLTFiZTljZjkwOTgzOQ==
+                             key: MTczNDk5MTU3MjY5NWU4NDJhYjcyLWIyYzUtNDI3OS05YmE1LTdlNmZiMmU3NTMxNA==
                             enabled: true
                 hosts:
                     - host: "overseerr.${BASE_DOMAIN}"
