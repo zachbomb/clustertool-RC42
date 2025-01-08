@@ -75,8 +75,8 @@ spec:
             loadBalancerIP: ${CROWDSEC_IP}
             ports:
               main:
-                port: 5055
-                targetPort: 5055
+                port: 6060
+                targetPort: 6060
       env:
         - name: DISABLE_ONLINE_API
           value: "false"
