@@ -90,7 +90,7 @@ spec:
                           timeStyle: short
                           hour12: true
                 enabled: true
-        forceConfigFromValues: false
+        forceConfigFromValues: true
         ingress:
             main:
                 enabled: true
