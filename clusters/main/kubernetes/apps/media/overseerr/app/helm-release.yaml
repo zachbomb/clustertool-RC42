@@ -50,7 +50,7 @@ spec:
                         widget:
                             overseerr:
                              url: https://overseer.sf.wethecommon.com
-                             key: MTczNjMyMzkzOTcyM2VlZmQzZmVhLTY1N2UtNGMxYS1hNmUzLWZkNDhkNjllMTc5ZA==
+                             key: MTczNjMyNDAxNjE5MGMzMThjZDQ1LWRiNmUtNGFkZC1hMDM3LWEwM2FiMzg2ZDdkYQ==
                             enabled: true
                 hosts:
                     - host: "overseerr.${BASE_DOMAIN}"
