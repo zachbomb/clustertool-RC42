@@ -18,6 +18,8 @@ metadata:
   name: intel-device-gpu
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: intel-device-plugins
   interval: 10m
   path: clusters/main/kubernetes/kube-system/intel-device-plugins/gpu
   prune: true
