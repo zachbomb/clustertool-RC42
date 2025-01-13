@@ -28,9 +28,7 @@ spec:
         TZ: America/Los_Angeles
         configmap:
             config:
-                # Wrap the enabled field inside a larger object to pass it as a map
-                configEnabled:
-                    enabled: true
+                enabled: true
                 data:
                     xmltv-settings.json: |
                         [{"cache":36,"refresh":1,"file":"/data/app_backups/Dizquetv_Backups/backups/xmltv.xml","_id":"df5b6424192945bf9ca31751b6309fd3","enableImageCache":true}]
