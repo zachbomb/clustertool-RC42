@@ -55,6 +55,27 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
+            addons:
+                codeserver:
+                    enabled: true
+                        ingress:
+                            enabled: true
+                            hosts:
+                            - host: homepage.code.${BASE_DOMAIN}
+                              paths:
+                              - path: /
+                                pathType: Prefix
+                            integrations:
+                                certManager:
+                                    certificateIssuer: wethecommon-prod-cert
+                                    enabled: true
+                                traefik:
+                                    enabled: true
+                                    middlewares:
+                                    - name: local
+                                    namespace: traefik
+                                    - name: bouncer
+                                    namespace: traefik
         nvidiaImage:
             pullPolicy: IfNotPresent
             repository: vexorian/dizquetv
@@ -109,6 +130,20 @@ spec:
                 path: /mnt/Pibbs-Horde/media/data/media/tv
                 server: 192.168.10.123
                 mountPath: /tv
+                mountOptions:
+                 - nfsvers=4
+                 - tcp
+                 - intr
+                 - hard
+                 - noatime
+                 - nodiratime
+                 - nolock
+            xmltv:
+                enabled: true
+                type: nfs
+                path: /mnt/Pibbs-Horde/media/data/app_backups/Dizquetv_Backups/backups/
+                server: 192.168.10.123
+                mountPath: /xmltv
                 mountOptions:
                  - nfsvers=4
                  - tcp
