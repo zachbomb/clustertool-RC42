@@ -26,14 +26,6 @@ spec:
                 secretKey: "${S3KEY}"
                 encrKey: "${S3KEY}"
         TZ: America/Los_Angeles
-#        configmap:
-#            config:
-#                enabled: true
-#                data:
-#                    enabled: true
-#                    xmltv-settings.json: |
-#                        [{"cache":36,"refresh":1,"file":"/data/app_backups/Dizquetv_Backups/backups/xmltv.xml","_id":"df5b6424192945bf9ca31751b6309fd3","enableImageCache":true}]
-#            forceConfigFromValues: true
         ingress:
             main:
                 enabled: true
