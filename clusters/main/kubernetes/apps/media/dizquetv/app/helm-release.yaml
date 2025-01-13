@@ -28,6 +28,7 @@ spec:
         TZ: America/Los_Angeles
         configmap:
             config:
+                enabled: true
                 data:
                     enabled: true
                     xmltv-settings.json: |
