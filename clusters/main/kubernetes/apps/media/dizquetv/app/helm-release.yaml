@@ -29,7 +29,7 @@ spec:
         configmap:
             config:
                 enabled: true
-            data: ""
+                data: ""
         ingress:
             main:
                 enabled: true
