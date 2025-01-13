@@ -26,6 +26,8 @@ spec:
                 secretKey: "${S3KEY}"
                 encrKey: "${S3KEY}"
         TZ: America/Los_Angeles
+        configmap:
+            config: ""
         ingress:
             main:
                 enabled: true
