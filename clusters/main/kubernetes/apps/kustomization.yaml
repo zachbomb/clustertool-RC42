@@ -4,3 +4,4 @@ resources:
   - kubernetes-dashboard/ks.yaml
   - media
   - networking
+  - code-server/ks.yaml
