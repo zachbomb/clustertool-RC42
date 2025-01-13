@@ -28,7 +28,8 @@ spec:
         TZ: America/Los_Angeles
         configmap:
             config:
-                enabled: true
+                enabled:
+                    value: true
                 data: ""
         ingress:
             main:
