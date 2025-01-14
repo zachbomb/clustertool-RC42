@@ -58,8 +58,8 @@ spec:
                     settings.yaml: "---\n# For configuration options and examples, please see:\n# https://gethomepage.dev/latest/configs/settings\n\nproviders:\n  openweathermap: openweathermapapikey\n  weatherapi: weatherapiapikey"
 
                     widgets.yaml: "---\n# For configuration options and examples, please see:\n# https://gethomepage.dev/latest/configs/widgets\n\n- unifi_console:\n    url: https://192.168.10.1:443\n    username: homepage\n    password: CNuGGQLz6Pth\n\n- resources:\n    cpu: true\n    memory: true\n    disk: / \n\n- search:\n    provider: duckduckgo\ntarget: _blank\n\n- datetime:\n    text_size: xl\n    format:\n      dateStyle: short\n      timeStyle: short\n      hour12: true"
-                enabled: true
-        forceConfigFromValues: true
+                enabled: false
+        forceConfigFromValues: false
         ingress:
             main:
                 enabled: true
