@@ -80,27 +80,6 @@ spec:
 #                    - hosts:
 #                        - homepage.${BASE_DOMAIN}
 #                      secretName: homepage-tls
-        addons:
-            codeserver:
-                enabled: true
-                    ingress:
-                        enabled: true
-                        hosts:
-                        - host: homepage-code.${BASE_DOMAIN}
-                          paths:
-                          - path: /
-                            pathType: Prefix
-                        integrations:
-                            certManager:
-                                certificateIssuer: wethecommon-prod-cert
-                                enabled: true
-                            traefik:
-                                enabled: true
-                                middlewares:
-                                - name: local
-                                  namespace: traefik
-                                - name: bouncer
-                                  namespace: traefik
         persistence:
             config:
                 enabled: true
@@ -294,4 +273,31 @@ spec:
             main:
                 enabled: true
                 primary: true
+        addons:
+            codeserver:
+                enabled: true
+                service:
+                    type: LoadBalancer
+                    loadBalancerIP: ${HOMEPAGE_IP}
+                    ports:
+                        codeserver:
+                            port: 12321
+                ingress:
+                    enabled: true
+                    hosts:
+                        - host: homepage-code.${BASE_DOMAIN}
+                          paths:
+                          - path: /
+                            pathType: Prefix
+                    integrations:
+                        certManager:
+                            certificateIssuer: wethecommon-prod-cert
+                            enabled: true
+                        traefik:
+                            enabled: true
+                            middlewares:
+                                - name: local
+                                  namespace: traefik
+                                - name: bouncer
+                                  namespace: traefik
 
