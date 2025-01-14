@@ -8,8 +8,11 @@
         "Kubernetes": "./kubernetes/*.yaml"
     },
     "vs-kubernetes": {
-        "vs-kubernetes.kubeconfig": "/workspaces/cluster/kubeconfig",
-        "vs-kubernetes.knownKubeconfigs": ["/workspaces/cluster/kubeconfig"]
+        "vs-kubernetes.kubeconfig": "/Users/zachbaum/.kube/config",
+        "vs-kubernetes.knownKubeconfigs": [
+            "/workspaces/cluster/kubeconfig",
+            "/Users/zachbaum/.kube/config"
+        ]
     },
     "terminal.integrated.profiles.linux": {
         "bash": {

@@ -55,27 +55,6 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-        addons:
-            codeserver:
-                enabled: true
-                    ingress:
-                        enabled: true
-                        hosts:
-                        - host: dizquetv-code.${BASE_DOMAIN}
-                          paths:
-                          - path: /
-                            pathType: Prefix
-                        integrations:
-                            certManager:
-                                certificateIssuer: wethecommon-prod-cert
-                                enabled: true
-                            traefik:
-                                enabled: true
-                                middlewares:
-                                - name: local
-                                  namespace: traefik
-                                - name: bouncer
-                                  namespace: traefik
         nvidiaImage:
             pullPolicy: IfNotPresent
             repository: vexorian/dizquetv
@@ -189,4 +168,30 @@ spec:
                         port: 10071
                         targetPort: 8000
                 type: LoadBalancer
-
+        addons:
+            codeserver:
+                enabled: true
+                service:
+                    type: LoadBalancer
+                    loadBalancerIP: ${DIZQUETV_IP}
+                    ports:
+                        codeserver:
+                            port: 12321
+                ingress:
+                    enabled: true
+                    hosts:
+                        - host: dizquetv-code.${BASE_DOMAIN}
+                          paths:
+                          - path: /
+                            pathType: Prefix
+                    integrations:
+                        certManager:
+                            certificateIssuer: wethecommon-prod-cert
+                            enabled: true
+                        traefik:
+                            enabled: true
+                            middlewares:
+                                - name: local
+                                  namespace: traefik
+                                - name: bouncer
+                                  namespace: traefik
