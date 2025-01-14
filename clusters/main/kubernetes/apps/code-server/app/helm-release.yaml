@@ -7,7 +7,6 @@ spec:
     interval: 5m
     chart:
         spec:
-            # renovate: registryUrl=https://charts.truechartsoci.org
             chart: code-server
             version: 13.10.0
             sourceRef:
@@ -35,7 +34,7 @@ spec:
             s3:
                 type: s3
                 url: "${S3URL}"
-                bucket: "${S3PREFIX}-dizquetv"
+                bucket: "${S3PREFIX}-code_server"
                 accessKey: "${S3ID}"
                 secretKey: "${S3KEY}"
                 encrKey: "${S3KEY}"
