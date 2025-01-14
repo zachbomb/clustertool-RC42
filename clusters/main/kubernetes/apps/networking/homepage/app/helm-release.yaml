@@ -52,119 +52,16 @@ spec:
                 readOnly: false
                 main:
                     mountPath: /config
-                    volsync:
-                        - name: config
-                          type: restic
-                          credentials: s3
-                          dest:
-                            enabled: true
-                            cacheCapacity: 10Gi
-                          src:
-                            enabled: true
-                            cacheCapacity: 10Gi
-            bookmarks-config:
-                enabled: '{{ not .Values.forceConfigFromValues }}'
-                mountPath: /config/bookmarks.yaml
-                objectName: config
-                readOnly: true
-                subPath: bookmarks.yaml
-                targetSelector:
-                    main: {}
-                type: configmap
-            custom-css-config:
-                enabled: '{{ not .Values.forceConfigFromValues }}'
-                mountPath: /config/custom.css
-                objectName: config
-                readOnly: true
-                subPath: custom.css
-                targetSelector:
-                    main: {}
-                type: configmap
-            custom-js-config:
-                enabled: '{{ not .Values.forceConfigFromValues }}'
-                mountPath: /config/custom.js
-                objectName: config
-                readOnly: true
-                subPath: custom.js
-                targetSelector:
-                    main: {}
-                type: configmap
-            force-bookmarks-config:
-                enabled: '{{ .Values.forceConfigFromValues }}'
-                mountPath: /app/config/bookmarks.yaml
-                objectName: config
-                readOnly: true
-                subPath: bookmarks.yaml
-                type: configmap
-            force-custom-css-config:
-                enabled: '{{ .Values.forceConfigFromValues }}'
-                mountPath: /app/config/custom.css
-                objectName: config
-                readOnly: true
-                subPath: custom.css
-                type: configmap
-            force-custom-js-config:
-                enabled: '{{ .Values.forceConfigFromValues }}'
-                mountPath: /app/config/custom.js
-                objectName: config
-                readOnly: true
-                subPath: custom.js
-                type: configmap
-            force-services-config:
-                enabled: '{{ .Values.forceConfigFromValues }}'
-                mountPath: /app/config/services.yaml
-                objectName: config
-                readOnly: true
-                subPath: services.yaml
-                type: configmap
-            force-settings-config:
-                enabled: '{{ .Values.forceConfigFromValues }}'
-                mountPath: /app/config/settings.yaml
-                objectName: config
-                readOnly: true
-                subPath: settings.yaml
-                type: configmap
-            force-widgets-config:
-                enabled: '{{ .Values.forceConfigFromValues }}'
-                mountPath: /app/config/widgets.yaml
-                objectName: config
-                readOnly: true
-                subPath: widgets.yaml
-                type: configmap
-            kubernetes-config:
-                enabled: true
-                mountPath: /app/config/kubernetes.yaml
-                objectName: config
-                readOnly: true
-                subPath: kubernetes.yaml
-                type: configmap
-            services-config:
-                enabled: '{{ not .Values.forceConfigFromValues }}'
-                mountPath: /config/services.yaml
-                objectName: config
-                readOnly: true
-                subPath: services.yaml
-                targetSelector:
-                    main: {}
-                type: configmap
-            settings-config:
-                enabled: '{{ not .Values.forceConfigFromValues }}'
-                mountPath: /config/settings.yaml
-                objectName: config
-                readOnly: true
-                subPath: settings.yaml
-                targetSelector:
-                    main: {}
-                type: configmap
-            widgets-config:
-                enabled: '{{ not .Values.forceConfigFromValues }}'
-                mountPath: /config/widgets.yaml
-                objectName: config
-                readOnly: true
-                subPath: widgets.yaml
-                targetSelector:
-                    main: {}
-                type: configmap
+#                    volsync:
+#                        - name: config
+#                          type: restic
+#                          credentials: s3
+#                          dest:
+#                            enabled: true
+#                            cacheCapacity: 10Gi
+#                          src:
+#                            enabled: true
+#                            cacheCapacity: 10Gi
         podOptions:
             dnsConfig:
                 options:
