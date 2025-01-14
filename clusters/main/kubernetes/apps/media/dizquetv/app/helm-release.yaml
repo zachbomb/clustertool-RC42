@@ -58,7 +58,7 @@ spec:
         nvidiaImage:
             pullPolicy: IfNotPresent
             repository: vexorian/dizquetv
-            tag: 1.5.5-nvidia@sha256:e93f121e458c56e93eaa0db3c94d03c8c00760616a781db770d9bbec49692ed3
+            tag: latest-nvidia@sha256:83ab31bf62ee67f9ba3d93994dc396ac678ef4fc1cbdc4df2d7ccb54d85da140
         persistence:
             config:
                 enabled: true
