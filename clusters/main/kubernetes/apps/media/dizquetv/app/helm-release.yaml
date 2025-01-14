@@ -120,7 +120,7 @@ spec:
             xmltv:
                 enabled: true
                 type: nfs
-                path: /mnt/Pibbs-Horde/media/data/app_backups/Dizquetv_Backups/backups
+                path: /mnt/Pibbs-Horde/media/data/app_backups/DizqueTV_Backups/backups
                 server: 192.168.10.123
                 mountPath: /xmltv
                 mountOptions:
