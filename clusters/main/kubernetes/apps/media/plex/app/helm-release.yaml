@@ -155,15 +155,14 @@ spec:
             backup:
                 enabled: true
                 mountPath: /config/Backups
-                volsync:
-                - name: config
-                  type: restic
-                  credentials: s3
-                  dest:
-                    enabled: true
-                  src:
-                    enabled: true
-
+#                volsync:
+#                - name: config
+#                  type: restic
+#                  credentials: s3
+#                  dest:
+#                    enabled: true
+#                  src:
+#                    enabled: true
         plex:
             additionalAdvertiseURL: ""
             disableGDM: false
