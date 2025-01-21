@@ -73,7 +73,7 @@ spec:
         persistence:
             config:
                 enabled: true
-                mountpath: /config
+                mountPath: /config
                 volsync:
                 - name: config
                   type: restic
@@ -154,7 +154,7 @@ spec:
                  - nolock
             backup:
                 enabled: true
-                mountpath: /config/Backups
+                mountPath: /config/Backups
                 volsync:
                 - name: config
                   type: restic
