@@ -15,16 +15,19 @@ spec:
                 kind: HelmRepository
                 name: truecharts
                 namespace: flux-system
-    releaseName: lidarr
     values:
         credentials:
             s3:
                 type: s3
                 url: "${S3URL}"
-                bucket: "${S3PREFIX}-lidarr"
+                bucket: "${S3PREFIX}-radarr"
                 accessKey: "${S3ID}"
                 secretKey: "${S3KEY}"
                 encrKey: "${S3KEY}"
+        exportarrImage:
+            pullPolicy: IfNotPresent
+            repository: ghcr.io/onedr0p/exportarr
+            tag: v2.0.1@sha256:727e7bc8f2f0934a2117978c59f4476b954018b849a010ea6cfb380bd6539644
         securityContext:
             container:
                 UMASK: "0022"
