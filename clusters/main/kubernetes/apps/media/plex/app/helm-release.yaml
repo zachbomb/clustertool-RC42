@@ -150,9 +150,9 @@ spec:
                  - noatime
                  - nodiratime
                  - nolock
-            backup:
-                enabled: true
-                mountPath: /config/Backups
+#            backup:
+#                enabled: true
+#                mountPath: /config/Backups
 #                volsync:
 #                - name: config
 #                  type: restic
