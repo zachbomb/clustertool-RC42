@@ -63,22 +63,22 @@ spec:
                 readOnly: false
                 main:
                     mountPath: /config
-#                    volsync:
-#                     - name: config
-#                       type: restic
-#                       credentials: s3
-#                       dest:
-#                         enabled: true
-#                         cacheCapacity: 100Gi
-#                       src:
-#                         enabled: true
-#                         cacheCapacity: 100Gi
-            data:
+                    volsync:
+                    - name: config
+                      credentials: s3
+                      type: restic
+                      dest:
+                        enabled: true
+                        cacheCapacity: 100Gi
+                      src:
+                        enabled: true
+                        cacheCapacity: 100Gi
+            media:
                 enabled: true
                 type: nfs
                 path: /mnt/Pibbs-Horde/media/data
                 server: 192.168.10.123
-                mountPath: /data
+                mountPath: /media
                 mountOptions:
                  - nfsvers=4
                  - tcp
