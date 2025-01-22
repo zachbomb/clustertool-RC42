@@ -15,4 +15,4 @@ resources:
   - sonarr/ks.yaml
   - tinymediamanager/ks.yaml
   - dizquetv/ks.yaml
-  - plex/ks.yaml
+
