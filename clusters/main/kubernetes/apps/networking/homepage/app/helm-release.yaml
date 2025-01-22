@@ -51,7 +51,6 @@ spec:
                 enabled: true
                 readOnly: false
                 main:
-                  mountPath: /config
                   volsync:
                   - name: config
                     type: restic
