@@ -51,16 +51,15 @@ spec:
                 enabled: true
                 readOnly: false
                 main:
-                    volsync:
-                        - name: config
-                          type: restic
-                          credentials: s3
-                          dest:
-                            enabled: true
-                            cacheCapacity: 10Gi
-                          src:
-                            enabled: true
-                            cacheCapacity: 10Gi
+                  mountPath: /config
+                  volsync:
+                  - name: config
+                    type: restic
+                    credentials: s3
+                    dest:
+                      enabled: true
+                    src:
+                      enabled: true
         podOptions:
             dnsConfig:
                 options:
