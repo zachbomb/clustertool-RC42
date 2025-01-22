@@ -19,12 +19,12 @@ spec:
     values:
         credentials:
             s3:
-                type: s3
-                url: "${S3URL}"
-                bucket: "${S3PREFIX}-dizquetv"
-                accessKey: "${S3ID}"
-                secretKey: "${S3KEY}"
-                encrKey: "${S3KEY}"
+              type: s3
+              url: "${S3URL}"
+              bucket: "${S3PREFIX}-homepage"
+              accessKey: "${S3ID}"
+              secretKey: "${S3KEY}"
+              encrKey: "${S3KEY}"
         TZ: America/Los_Angeles
         ingress:
             main:
@@ -62,7 +62,6 @@ spec:
         persistence:
             config:
                 enabled: true
-                readOnly: false
                 main:
                   mountPath: /config
                   volsync:
