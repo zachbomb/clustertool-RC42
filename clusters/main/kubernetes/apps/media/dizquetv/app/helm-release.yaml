@@ -61,8 +61,9 @@ spec:
             tag: latest-nvidia@sha256:83ab31bf62ee67f9ba3d93994dc396ac678ef4fc1cbdc4df2d7ccb54d85da140
         persistence:
             config:
+                enabled: true
+                readOnly: false
                 main:
-                    enabled: true
                     mountPath: /config
                     volsync:
                     - name: config
