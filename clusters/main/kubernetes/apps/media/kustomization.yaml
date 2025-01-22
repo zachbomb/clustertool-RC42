@@ -15,3 +15,4 @@ resources:
   - tinymediamanager/ks.yaml
   - dizquetv/ks.yaml
   - plex/ks.yaml
+  - emby/ks.yaml
