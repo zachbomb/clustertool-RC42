@@ -7,7 +7,6 @@ resources:
   - roon/ks.yaml
   - prowlarr/ks.yaml
   - radarr/ks.yaml
-  - emby/ks.yaml
   - lidarr/ks.yaml
   - nzbget/ks.yaml
   - overseerr/ks.yaml
@@ -15,5 +14,4 @@ resources:
   - sonarr/ks.yaml
   - tinymediamanager/ks.yaml
   - dizquetv/ks.yaml
-
   - plex/ks.yaml
