@@ -103,12 +103,12 @@ spec:
                        src:
                          enabled: true
                          cacheCapacity: 100Gi
-            data:
+            media:
                 enabled: true
                 type: nfs
                 path: /mnt/Pibbs-Horde/media/data
                 server: 192.168.10.123
-                mountPath: /data
+                mountPath: /media
                 mountOptions:
                  - nfsvers=4
                  - tcp
