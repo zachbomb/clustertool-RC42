@@ -84,12 +84,12 @@ spec:
                 main:
                     mountPath: /config
                     volsync:
-                     - name: config
-                       type: restic
-                       credentials: s3
-                       dest:
+                    - name: config
+                      credentials: s3
+                      type: restic
+                      dest:
                         enabled: true
-                       src:
+                      src:
                         enabled: true
             data:
                 enabled: true
