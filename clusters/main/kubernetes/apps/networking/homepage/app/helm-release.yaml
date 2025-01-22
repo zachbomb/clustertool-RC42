@@ -48,17 +48,15 @@ spec:
 #                      secretName: homepage-tls
         persistence:
             config:
-                enabled: true
-                readOnly: false
-                main:
-                  volsync:
-                  - name: config
-                    type: restic
-                    credentials: s3
-                    dest:
-                      enabled: true
-                    src:
-                      enabled: true
+              mountPath: /config
+              volsync:
+              - name: config
+                type: restic
+                credentials: s3
+                dest:
+                  enabled: true
+                src:
+                  enabled: true
         podOptions:
             dnsConfig:
                 options:
