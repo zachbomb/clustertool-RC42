@@ -95,6 +95,9 @@ spec:
                         enabled: true
                       src:
                         enabled: true
+                    exportarr:
+                      mountPath: /config
+                      readOnly: true
             media:
                 enabled: true
                 type: nfs

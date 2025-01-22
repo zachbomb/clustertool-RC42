@@ -86,7 +86,14 @@ spec:
                     enabled: false
                 targetSelector: metrics
                 type: servicemonitor
-
+        securityContext:
+            container:
+                UMASK: "0022"
+                runAsGroup: 1000
+                runAsUser: 1000
+            pod:
+                fsGroup: 1000
+                fsGroupChangePolicy: OnRootMismatch
         persistence:
             config:
                 enabled: true
@@ -103,6 +110,9 @@ spec:
                        src:
                          enabled: true
                          cacheCapacity: 100Gi
+                    exportarr:
+                      mountPath: /config
+                      readOnly: true
             media:
                 enabled: true
                 type: nfs
@@ -158,14 +168,5 @@ spec:
                       src:
                         enabled: true
                         cacheCapacity: 10Gi
-        release_name: sonarr
-        resources: {}
-        securityContext:
-            container:
-                UMASK: "0022"
-                runAsGroup: 1000
-                runAsUser: 1000
-            pod:
-                fsGroup: 1000
-                fsGroupChangePolicy: OnRootMismatch
+
 
