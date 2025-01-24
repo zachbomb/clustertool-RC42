@@ -5,12 +5,17 @@ on:
   schedule:
     - cron: "0 * * * *"
 
+permissions:
+  contents: write
+  issues: write
+
 jobs:
   labels:
     name: Sync Labels
     runs-on: ubuntu-latest
 
     steps:
+      # Set up SSH key for authentication
       - name: Set up SSH key for GitHub
         run: |
           mkdir -p ~/.ssh
@@ -20,23 +25,24 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+      # Checkout the repository using SSH
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@v2
         with:
           repository: "git@github.com:zachbomb/clustertool-RC42.git"
-          token: "${GITHUB_TOKEN}"
           fetch-depth: 0
 
-
+      # Set up Git for authentication (for label sync)
       - name: Set up Git for authentication (for label sync)
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global credential.helper store
-          echo "https://"${GITHUB_TOKEN}":x-oauth-basic@github.com" > ~/.git-credentials
+          echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
 
+      # Sync Labels
       - name: Sync Labels
-        uses: EndBug/label-sync@52074158190acb45f3077f9099fea818aa43f97a # v2
+        uses: EndBug/label-sync@v2
         with:
           config-file: |
             https://raw.githubusercontent.com/truecharts/.github/main/.github/labels.yaml
