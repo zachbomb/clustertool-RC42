@@ -8,6 +8,7 @@ on:
 permissions:
   contents: write
   issues: write
+  metadata: read   # Adding read permissions for repository metadata (like default branch)
 
 jobs:
   labels:
@@ -15,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Set up SSH key for authentication
+      # Set up SSH key for GitHub (optional if switching to HTTPS)
       - name: Set up SSH key for GitHub
         run: |
           mkdir -p ~/.ssh
@@ -24,18 +25,22 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+      # Debug environment variables (remove or leave as debug)
       - name: Debug environment variables
         run: |
           echo "GITHUB_TOKEN=$GITHUB_TOKEN"
           echo "SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY"
           printenv
 
-      # Checkout the repository using SSH
+      # Checkout the repository using HTTPS (instead of SSH)
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: "git@github.com:zachbomb/clustertool-RC42.git"
-          fetch-depth: 0
+          repository: "zachbomb/clustertool-RC42"  # Use HTTPS format for GitHub
+          token: "${GITHUB_TOKEN}"  # Use the GitHub token for authentication
+          fetch-depth: 0  # Ensures we get the full history for label sync
+          ref: "main"  # Explicitly specify the branch to avoid default branch issues
 
       # Set up Git for authentication (for label sync)
       - name: Set up Git for authentication (for label sync)
@@ -43,7 +48,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global credential.helper store
-          echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
+          echo "https://"${GITHUB_TOKEN}":x-oauth-basic@github.com" > ~/.git-credentials
 
       # Sync Labels
       - name: Sync Labels
