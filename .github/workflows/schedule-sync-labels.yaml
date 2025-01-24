@@ -8,7 +8,6 @@ on:
 permissions:
   contents: write
   issues: write
-  metadata: read   # Adding read permissions for repository metadata (like default branch)
 
 jobs:
   labels:
