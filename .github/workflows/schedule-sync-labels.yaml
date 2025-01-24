@@ -28,7 +28,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: "git@github.com:zachbomb/clustertool-RC42.git"
+          repository: "ssh://git@github.com:zachbomb/clustertool-RC42.git"
           fetch-depth: 0
         #  ref: "main"
 
