@@ -38,7 +38,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global credential.helper store
-          echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
+          echo "https://"${GITHUB_TOKEN}":x-oauth-basic@github.com" > ~/.git-credentials
 
       # Checkout the repository using HTTPS (instead of SSH)
       - name: Checkout
@@ -51,7 +51,7 @@ jobs:
 
       # Sync Labels
       - name: Sync Labels
-        uses: EndBug/label-sync@v2
+        uses: EndBug/label-sync@v4
         with:
           config-file: |
             https://raw.githubusercontent.com/truecharts/.github/main/.github/labels.yaml
