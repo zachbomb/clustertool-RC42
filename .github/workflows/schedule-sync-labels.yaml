@@ -35,7 +35,7 @@ jobs:
 
       # Checkout the repository using HTTPS (instead of SSH)
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           repository: "zachbomb/clustertool-RC42"  # Use HTTPS format for GitHub
           token: "${GITHUB_TOKEN}"  # Use the GitHub token for authentication
@@ -52,7 +52,7 @@ jobs:
 
       # Sync Labels
       - name: Sync Labels
-        uses: EndBug/label-sync@v2
+        uses: EndBug/label-sync@52074158190acb45f3077f9099fea818aa43f97a # v2
         with:
           config-file: |
             https://raw.githubusercontent.com/truecharts/.github/main/.github/labels.yaml
