@@ -19,13 +19,13 @@ jobs:
           echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2
         with:
           token: "${GITHUB_TOKEN}"
           fetch-depth: 0 
 
       - name: Sync Labels
-        uses: EndBug/label-sync@v2
+        uses: EndBug/label-sync@52074158190acb45f3077f9099fea818aa43f97a # v2
         with:
           config-file: |
             https://raw.githubusercontent.com/truecharts/.github/main/.github/labels.yaml
