@@ -41,7 +41,7 @@ jobs:
           echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
       # Sync Labels
       - name: Sync Labels
-        uses: EndBug/label-sync@52074158190acb45f3077f9099fea818aa43f97a
+        uses: EndBug/label-sync@146b400dc7fc98a7d5ffe83e2926c1188241bda2
         with:
           config-file: |
             https://raw.githubusercontent.com/truecharts/.github/main/.github/labels.yaml
