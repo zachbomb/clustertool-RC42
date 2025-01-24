@@ -22,7 +22,7 @@
       "labels": ["type/pin", "automerge"]
     },
     {
-      "matchUpdateTypes": ["lockFileMaintenance"],
+      "matchUpdateTypes": ["lockfile"],
       "labels": ["type/lockfile", "automerge"]
     },
     {
