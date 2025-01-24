@@ -24,11 +24,13 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      - name: Debug environment variables
-        run: |
-          echo "GITHUB_TOKEN=$GITHUB_TOKEN"
-          echo "SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY"
-          printenv
+      # Checkout the repository using SSH
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: "git@github.com:zachbomb/clustertool-RC42.git"
+          fetch-depth: 0
+          ref: "main"
 
       # Set up Git for authentication (for label sync)
       - name: Set up Git for authentication (for label sync)
@@ -37,19 +39,9 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global credential.helper store
           echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
-
-      # Checkout the repository using SSH
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          repository: "git@github.com:zachbomb/clustertool-RC42.git"
-          token: "${GITHUB_TOKEN}"
-          fetch-depth: 0
-          ref: "main"
-
       # Sync Labels
       - name: Sync Labels
-        uses: EndBug/label-sync@v4
+        uses: EndBug/label-sync@52074158190acb45f3077f9099fea818aa43f97a
         with:
           config-file: |
             https://raw.githubusercontent.com/truecharts/.github/main/.github/labels.yaml
