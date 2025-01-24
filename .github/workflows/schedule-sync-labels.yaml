@@ -26,7 +26,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
       # Checkout the repository using SSH
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        uses: actions/checkout@v4
         with:
           repository: "git@github.com:zachbomb/clustertool-RC42.git"
           fetch-depth: 0
@@ -41,7 +41,7 @@ jobs:
           echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
       # Sync Labels
       - name: Sync Labels
-        uses: EndBug/label-sync@52074158190acb45f3077f9099fea818aa43f97a
+        uses: EndBug/label-sync@v4
         with:
           config-file: |
             https://raw.githubusercontent.com/truecharts/.github/main/.github/labels.yaml
