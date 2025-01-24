@@ -32,6 +32,14 @@ jobs:
           echo "SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY"
           printenv
 
+      # Set up Git for authentication (for label sync)
+      - name: Set up Git for authentication (for label sync)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global credential.helper store
+          echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
+
       # Checkout the repository using HTTPS (instead of SSH)
       - name: Checkout
         uses: actions/checkout@v2
@@ -40,14 +48,6 @@ jobs:
           token: "${GITHUB_TOKEN}"  # Use the GitHub token for authentication
           fetch-depth: 0  # Ensures we get the full history for label sync
           ref: "main"  # Explicitly specify the branch to avoid default branch issues
-
-      # Set up Git for authentication (for label sync)
-      - name: Set up Git for authentication (for label sync)
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global credential.helper store
-          echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
 
       # Sync Labels
       - name: Sync Labels
