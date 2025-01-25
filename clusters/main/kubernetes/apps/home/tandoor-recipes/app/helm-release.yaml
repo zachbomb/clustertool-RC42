@@ -44,6 +44,19 @@ spec:
         encrKey: "${S3KEY}"
 
     persistence:
+      config:
+        enabled: true
+        main:
+          enabled: true
+          mountPath: /config
+          volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
       media:
         enabled: true
         mountPath: /opt/recipes/mediafiles
@@ -66,16 +79,6 @@ spec:
                 enabled: true
               src:
                 enabled: true
-
-    cnpg:
-      main:
-        #mode: recovery
-        backups:
-          enabled: true
-          credentials: s3
-        recovery:
-          method: object_store
-          credentials: s3
 
     ingress:
       main:

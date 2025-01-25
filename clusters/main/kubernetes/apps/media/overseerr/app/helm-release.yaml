@@ -136,17 +136,17 @@ spec:
                  - noatime
                  - nodiratime
                  - nolock
-            backup:
-                enabled: true
-                mountPath: /backups
-                volsync:
-                    - name: b2
-                      type: restic
-                      credentials: s3
-                      dest:
-                        enabled: true
-                      src:
-                        enabled: true
+#            backup:
+#               enabled: true
+#                mountPath: /backups
+#                volsync:
+#                    - name: b2
+#                      type: restic
+#                      credentials: s3
+#                      dest:
+#                        enabled: true
+#                      src:
+#                        enabled: true
         securityContext:
             container:
                 UMASK: "022"
