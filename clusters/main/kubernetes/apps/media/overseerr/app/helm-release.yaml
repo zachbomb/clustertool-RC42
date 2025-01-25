@@ -69,21 +69,23 @@ spec:
         persistence:
             config:
                 enabled: true
-                mountPath: /config
-                volsync:
-                - name: config
-                  type: restic
-                  credentials: s3
-                  dest:
+                main:
                     enabled: true
-                  src:
-                    enabled: true
-            data:
+                    mountPath: /config
+                    volsync:
+                    - name: config
+                      type: restic
+                      credentials: s3
+                      dest:
+                        enabled: true
+                      src:
+                        enabled: true
+            media:
                 enabled: true
                 type: nfs
                 path: /mnt/Pibbs-Horde/media/data
                 server: 192.168.10.123
-                mountPath: /data
+                mountPath: /media
                 mountOptions:
                  - nfsvers=4
                  - tcp
