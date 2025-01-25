@@ -5,3 +5,4 @@ resources:
   - media
   - networking
   - code-server/ks.yaml
+  - home

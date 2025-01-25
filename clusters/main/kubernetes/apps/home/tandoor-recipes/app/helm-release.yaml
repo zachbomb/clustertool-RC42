@@ -1,0 +1,104 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tandoor-recipes
+  namespace: tandoor-recipes
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: tandoor-recipes
+      version: 18.4.2
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    strategy:
+      type: Recreate
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+    strategy:
+      type: Recreate
+  uninstall:
+    keepHistory: false
+  values:
+    credentials:
+      s3:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3PREFIX}-tandoor-recipes"
+        accessKey: "${S3ID}"
+        secretKey: "${S3KEY}"
+        encrKey: "${S3KEY}"
+
+    persistence:
+      media:
+        enabled: true
+        mountPath: /opt/recipes/mediafiles
+        volsync:
+          - name: media
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
+        static:
+          enabled: true
+          mountPath: /opt/recipes/staticfiles
+          volsync:
+            - name: static
+              type: restic
+              credentials: s3
+              dest:
+                enabled: true
+              src:
+                enabled: true
+
+    cnpg:
+      main:
+        #mode: recovery
+        backups:
+          enabled: true
+          credentials: s3
+        recovery:
+          method: object_store
+          credentials: s3
+
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: "tandoor.${BASE_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        integrations:
+          traefik:
+            enabled: true
+            middlewares:
+              - name: local
+                namespace: traefik
+              - name: bouncer
+                namespace: traefik
+          certManager:
+            enabled: true
+            certificateIssuer: wethecommon-prod-cert
+          homepage:
+            description: Recipe Organizer
+            enabled: true
+            group: Home Automation
+            icon: ""
+            name: Tandoor
