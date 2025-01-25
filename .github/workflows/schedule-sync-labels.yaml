@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Set up SSH key for authentication
+      # Set up SSH key for authentication (if you're using SSH)
       - name: Set up SSH key for GitHub
         run: |
           mkdir -p ~/.ssh
@@ -24,26 +24,20 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      # Checkout the repository using SSH
+          
+      # Checkout the repository using SSH (if you're using SSH)
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@v4
         with:
-          repository: "zachbomb/clustertool-RC42.git"
+          repository: "zachbomb/clustertool-RC42"   # SSH format repository
           fetch-depth: 0
-          ref: "main"
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Use SSH key from GitHub secrets
 
-      # Set up Git for authentication (for label sync)
-      - name: Set up Git for authentication (for label sync)
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global credential.helper store
-          echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
-      # Sync Labels
+      # Sync Labels (ensure correct token is used)
       - name: Sync Labels
-        uses: EndBug/label-sync@52074158190acb45f3077f9099fea818aa43f97a # v2
+        uses: EndBug/label-sync@v4
         with:
           config-file: |
             https://raw.githubusercontent.com/truecharts/.github/main/.github/labels.yaml
-          token: "${GITHUB_TOKEN}"
+          token: "${{ secrets.GITHUB_TOKEN }}"  # Use GitHub Token here (ensure it's correctly passed)
           delete-other-labels: true
