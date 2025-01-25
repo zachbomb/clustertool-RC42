@@ -15,12 +15,23 @@ jobs:
     runs-on: ubuntu-latest
     name: "Housekeeping"
     steps:
-      - name: Checkout branch
+      - name: Set up SSH key for GitHub
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+      # Checkout the repository using SSH (if you're using SSH)
+      - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
+          repository: "zachbomb/clustertool-RC42"   # SSH format repository
           fetch-depth: 0
-          token: ${{ secrets.BOT_TOKEN }}
-
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Use SSH key from GitHub secrets
+          
       - name: Containers - Fetch new application versions
         run: |
           find ./apps -maxdepth 1 -mindepth 1 -type d -exec basename {} \; | while read app; do
