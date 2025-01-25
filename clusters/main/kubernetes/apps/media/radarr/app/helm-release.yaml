@@ -162,15 +162,13 @@ spec:
          - nolock
       backup:
         enabled: true
-        mountPath: /config/Backups
-        volsync:
-          - credentials: s3
-            name: backup
-            type: restic
-            dest:
-              enabled: true
-              cacheCapacity: 10Gi
-            src:
-              enabled: true
-              cacheCapacity: 10Gi
+        mountPath: /backups
+      #  volsync:
+      #  - credentials: s3
+      #    name: backup
+      #    type: restic
+      #    dest:
+      #      enabled: true
+      #    src:
+      #      enabled: true
             
