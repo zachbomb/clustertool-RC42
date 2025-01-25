@@ -62,15 +62,17 @@ spec:
         persistence:
             config:
                 enabled: true
-                mountPath: /config
-                volsync:
-                - name: config
-                  type: restic
-                  credentials: s3
-                  dest:
-                    enabled: true
-                  src:
-                    enabled: true
+                main:
+                  enabled: true
+                  mountPath: /config
+                  volsync:
+                  - name: config
+                    type: restic
+                    credentials: s3
+                    dest:
+                      enabled: true
+                    src:
+                      enabled: true
 #            data:
 #                enabled: true
 #                type: nfs
