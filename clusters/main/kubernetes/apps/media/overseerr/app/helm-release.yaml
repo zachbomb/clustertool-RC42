@@ -139,14 +139,14 @@ spec:
             backup:
                 enabled: true
                 mountPath: /backups
-#                volsync:
-#                    - name: b2
-#                      type: restic
-#                      credentials: s3
-#                      dest:
-#                        enabled: true
-#                      src:
-#                        enabled: true
+                volsync:
+                    - name: b2
+                      type: restic
+                      credentials: s3
+                      dest:
+                        enabled: true
+                      src:
+                        enabled: true
         securityContext:
             container:
                 UMASK: "022"
