@@ -28,6 +28,6 @@ resources:
   - stakater.yaml
   - topolvm.yaml
   - truecharts.yaml
-# more goes here!
   - crowdsec.yaml
   - nvdp.yaml
+# more goes here!
