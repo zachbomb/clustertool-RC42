@@ -91,4 +91,8 @@ spec:
             main:
                 enabled: true
                 loadBalancerIP: ${TANDOOR_IP}
+                ports:
+                    main:
+                        port: 10029
+                        targetPort: 10029
                 type: LoadBalancer
