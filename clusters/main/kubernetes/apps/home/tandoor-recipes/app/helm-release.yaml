@@ -41,28 +41,28 @@ spec:
 #              enabled: true
 #            src:
 #              enabled: true
-      media:
-        enabled: true
-        mountPath: /opt/recipes/mediafiles
-        volsync:
-          - name: media
-            type: restic
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true
-        static:
-          enabled: true
-          mountPath: /opt/recipes/staticfiles
-          volsync:
-            - name: static
-              type: restic
-              credentials: s3
-              dest:
-                enabled: true
-              src:
-                enabled: true
+#      media:
+#        enabled: true
+#        mountPath: /opt/recipes/mediafiles
+#        volsync:
+#          - name: media
+#            type: restic
+#            credentials: s3
+#            dest:
+#              enabled: true
+#            src:
+#              enabled: true
+#        static:
+#          enabled: true
+#          mountPath: /opt/recipes/staticfiles
+#          volsync:
+#            - name: static
+#              type: restic
+#              credentials: s3
+#              dest:
+#                enabled: true
+#              src:
+#                enabled: true
 
     ingress:
       main:
