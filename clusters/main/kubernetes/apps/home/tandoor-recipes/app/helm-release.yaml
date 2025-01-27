@@ -30,9 +30,9 @@ spec:
     persistence:
       config:
         enabled: true
-#        main:
-#          enabled: true
-#          mountPath: /config
+        main:
+          enabled: true
+          mountPath: /config
 #          volsync:
 #          - name: config
 #            type: restic
