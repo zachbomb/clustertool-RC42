@@ -67,8 +67,10 @@ spec:
                   credentials: s3
                   dest:
                     enabled: true
+                    cacheCapacity: 100Gi
                   src:
                     enabled: true
+                    cacheCapacity: 100Gi
             media:
                 enabled: true
                 type: nfs
