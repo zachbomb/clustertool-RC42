@@ -87,3 +87,8 @@ spec:
             group: Home Automation
             icon: ""
             name: Tandoor
+        service:
+            main:
+                enabled: true
+                loadBalancerIP: ${TANDOOR_IP}
+                type: LoadBalancer
