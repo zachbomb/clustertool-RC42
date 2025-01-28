@@ -88,11 +88,9 @@ spec:
             icon: ""
             name: Tandoor
     service:
-      main:
-        enabled: true
-        loadBalancerIP: ${TANDOOR_IP}
-        ports:
-          main:
-            port: 10029
-            targetPort: 5798
-        type: LoadBalancer
+      enabled: true
+      loadBalancerIP: ${TANDOOR_IP}
+      ports:
+        port: 10029
+        targetPort: 5798
+      type: LoadBalancer
