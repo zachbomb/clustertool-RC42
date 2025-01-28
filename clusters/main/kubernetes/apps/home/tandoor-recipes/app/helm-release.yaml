@@ -26,19 +26,25 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
-
+    service:
+      enabled: true
+      loadBalancerIP: ${TANDOOR_IP}
+      ports:
+        port: 10029
+        targetPort: 5798
+      type: LoadBalancer
     persistence:
       config:
         enabled: true
         mountPath: /config
-          volsync:
-          - name: config
-            type: restic
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true
+        volsync:
+        - name: config
+          type: restic
+          credentials: s3
+          dest:
+            enabled: true
+          src:
+            enabled: true
       media:
         enabled: true
         mountPath: /opt/recipes/mediafiles
@@ -87,10 +93,4 @@ spec:
             group: Home Automation
             icon: ""
             name: Tandoor
-    service:
-      enabled: true
-      loadBalancerIP: ${TANDOOR_IP}
-      ports:
-        port: 10029
-        targetPort: 5798
-      type: LoadBalancer
+
