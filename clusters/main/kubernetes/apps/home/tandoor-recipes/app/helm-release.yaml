@@ -94,5 +94,5 @@ spec:
               ports:
                 main:
                   port: 10029
-                  targetPort: 5432
+                  targetPort: 5798
               type: LoadBalancer
