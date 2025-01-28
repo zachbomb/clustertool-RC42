@@ -26,14 +26,6 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
-    service:
-      main:
-        enabled: true
-        loadBalancerIP: ${TANDOOR_IP}
-        ports:
-          port: 10029
-          targetPort: 5798
-        type: LoadBalancer
     persistence:
       config:
         enabled: true
@@ -70,7 +62,14 @@ spec:
 #                enabled: true
 #              src:
 #                enabled: true
-
+    service:
+      main:
+        enabled: true
+        loadBalancerIP: ${TANDOOR_IP}
+        ports:
+          port: 10029
+          targetPort: 5798
+        type: LoadBalancer
     ingress:
       main:
         enabled: true
