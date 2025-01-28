@@ -31,17 +31,17 @@ spec:
       config:
         enabled: true
         mountPath: /config
-#          volsync:
-#          - name: config
-#            type: restic
-#            credentials: s3
-#            dest:
-#              enabled: true
-#            src:
-#              enabled: true
-#      media:
-#        enabled: true
-#        mountPath: /opt/recipes/mediafiles
+          volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      media:
+        enabled: true
+        mountPath: /opt/recipes/mediafiles
 #        volsync:
 #          - name: media
 #            type: restic
