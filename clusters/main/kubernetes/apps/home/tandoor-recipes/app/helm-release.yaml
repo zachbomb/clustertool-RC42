@@ -65,7 +65,11 @@ spec:
     service:
       main:
         enabled: true
-        loadBalancerIP: ${TANDOOR_IP}
+        loadBalancerIP: ${T_IP}
+        ports:
+          enabled: true
+          port: 10029
+          targetPort: 10029
         type: LoadBalancer
     ingress:
       main:
