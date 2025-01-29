@@ -60,7 +60,7 @@ controlPlane:
                     - siderolabs/iscsi-tools
                     - siderolabs/qemu-guest-agent
                     - siderolabs/gasket-driver
-                    - siderolabs/i915-ucode
+                    - siderolabs/i915
                     - siderolabs/intel-ucode
                     - siderolabs/thunderbolt
                     - siderolabs/nonfree-kmod-nvidia-production
@@ -108,7 +108,7 @@ worker:
                     - siderolabs/iscsi-tools
                     - siderolabs/qemu-guest-agent
                     - siderolabs/gasket-driver
-                    - siderolabs/i915-ucode
+                    - siderolabs/i915
                     - siderolabs/intel-ucode
                     - siderolabs/thunderbolt
                     - siderolabs/nonfree-kmod-nvidia-production
