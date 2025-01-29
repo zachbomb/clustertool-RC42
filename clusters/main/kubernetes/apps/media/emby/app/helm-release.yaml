@@ -38,8 +38,8 @@ spec:
                          - name: bouncer
                            namespace: traefik
                     certManager:
-                        certificateIssuer: wethecommon-prod-cert
                         enabled: true
+                        certificateIssuer: wethecommon-prod-cert
                     homepage:
                         description: Media Player
                         enabled: true
@@ -65,10 +65,10 @@ spec:
                   credentials: s3
                   dest:
                     enabled: true
-                    cacheCapacity: 100Gi
+                    cacheCapacity: 10Gi
                   src:
                     enabled: true
-                    cacheCapacity: 100Gi
+                    cacheCapacity: 10Gi
             media:
                 enabled: true
                 type: nfs
