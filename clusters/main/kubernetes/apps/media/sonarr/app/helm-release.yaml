@@ -47,8 +47,6 @@ spec:
                         middlewares:
                          - name: local
                            namespace: traefik
-                         - name: bouncer
-                           namespace: traefik
                     certManager:
                         certificateIssuer: wethecommon-prod-cert
                         enabled: true
