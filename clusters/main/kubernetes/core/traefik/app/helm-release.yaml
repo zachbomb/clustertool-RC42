@@ -48,12 +48,12 @@ spec:
         enabled: true
     defaultCertificate: "wethecommon-wildcard-cert"
     persistence:
-    #  crowdsec-bouncer-tls:
-    #    enabled: '{{ if .Values.middlewares.bouncer }}true{{ else }}false{{ end }}'
-    #    expandObjectName: false
-    #    mountPath: /etc/traefik/crowdsec-certs
-    #    objectName: crowdsec-bouncer-tls
-    #    type: secret
+#      crowdsec-bouncer-tls:
+#        enabled: '{{ if .Values.middlewares.bouncer }}true{{ else }}false{{ end }}'
+#        expandObjectName: false
+#        mountPath: /etc/traefik/crowdsec-certs
+#        objectName: crowdsec-bouncer-tls
+#        type: secret
       plugins:
         enabled: true
         mountPath: /plugins-storage
@@ -150,28 +150,28 @@ spec:
             main:
                 enabled: true
                 primary: true
-    ingress:
-      main:
-        enabled: true
-        integrations:
-          traefik:
-            enabled: true
-            middlewares:
-              - name: local
-                namespace: traefik
-          certManager:
-            certificateIssuer: wethecommon-prod-cert
-            enabled: true
-        hosts:
-          - host: traefik-dashboard.${BASE_DOMAIN}
-            paths:
-              - path: /dashboard
-                pathType: Prefix
-              - path: /api
-                pathType: Prefix
-        ingressRoute:
-            dashboard:
-                enabled: true
+#    ingress:
+#      main:
+#        enabled: true
+#        integrations:
+#          traefik:
+#            enabled: true
+#            middlewares:
+#              - name: local
+#                namespace: traefik
+#          certManager:
+#            certificateIssuer: wethecommon-prod-cert
+#            enabled: true
+#        hosts:
+#          - host: traefik-dashboard.${BASE_DOMAIN}
+#            paths:
+#              - path: /dashboard
+#                pathType: Prefix
+#              - path: /api
+#                pathType: Prefix
+#        ingressRoute:
+#            dashboard:
+#                enabled: true
                 
     middlewares:
       ipWhiteList:
