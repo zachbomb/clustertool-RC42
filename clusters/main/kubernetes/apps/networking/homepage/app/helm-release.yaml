@@ -154,6 +154,4 @@ spec:
                             middlewares:
                                 - name: local
                                   namespace: traefik
-                                - name: bouncer
-                                  namespace: traefik
 
