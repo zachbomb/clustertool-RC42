@@ -4,13 +4,13 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: ollama
-  namespace: ollama  # Replace with your namespace
+  namespace: ollama  # Replace with your namespace if needed
 spec:
   interval: 15m
   chart:
     spec:
-      chart: ollama  # Replace with the actual chart name if available
-      version: 7.11.10  # Replace with appropriate chart version
+      chart: ollama  # Replace with the correct chart name in the Helm repository
+      version: 7.11.10  # Replace with the correct chart version
       sourceRef:
         kind: HelmRepository
         name: truecharts  # Assuming you are using the TrueCharts repository
@@ -20,7 +20,7 @@ spec:
     credentials:
       s3:
         type: s3
-        url: "${S3URL}"
+        url: "${S3URL}"  # Ensure this value is provided or set via Secret/ConfigMap
         bucket: "${S3PREFIX}-ollama"
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
@@ -28,7 +28,7 @@ spec:
     service:
       main:
         enabled: true
-        loadBalancerIP: ${OLLAMA_IP}
+        loadBalancerIP: "${OLLAMA_IP}"  # Ensure this environment variable is set
         targetSelector: ui
         ports:
           main:
@@ -38,7 +38,7 @@ spec:
         type: LoadBalancer
       api:
         enabled: true
-        loadBalancerIP: ${OLLAMA_IP}
+        loadBalancerIP: "${OLLAMA_IP}"  # Ensure this environment variable is set
         targetSelector: main
         ports:
           api:
@@ -48,30 +48,29 @@ spec:
             port: 11434
             targetSelector: main
         type: LoadBalancer
-  ingress:
-    main:
-      enabled: true
-      integrations:
-        traefik:
-          enabled: true
-          middlewares:
-          - name: local
-            namespace: traefik
-        certManager:
-          certificateIssuer: wethecommon-prod-cert
-          enabled: true
-        homepage:
-          description: AI Language Model
-          enabled: true
-          group: Home Automation
-          icon: ""
-          name: Ollama
-
-      hosts:
-        - host: "ollama.${BASE_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
+    ingress:
+      main:
+        enabled: true
+        integrations:
+          traefik:
+            enabled: true
+            middlewares:
+              - name: local
+                namespace: traefik
+          certManager:
+            certificateIssuer: wethecommon-prod-cert
+            enabled: true
+          homepage:
+            description: AI Language Model
+            enabled: true
+            group: Home Automation
+            icon: ""
+            name: Ollama
+        hosts:
+          - host: "ollama.${BASE_DOMAIN}"  # Ensure this is set properly or replaced with actual domain
+            paths:
+              - path: /
+                pathType: Prefix
       api:
         enabled: false
         targetSelector:
@@ -81,7 +80,7 @@ spec:
         enabled: true
         def_user_role: "pending"
       stable_diffusion:
-        base_url: ""
+        base_url: ""  # Update this value if necessary
       whisper:
         model: "base"
       rag:
@@ -98,16 +97,16 @@ spec:
                   enabled: true
                   type: http
                   path: /api/version
-                  port: 11434  # Adjust as needed to point to the correct port
+                  port: 11434  # Ensure the correct port for the main API
                 readiness:
                   enabled: true
                   type: http
                   path: /api/version
-                  port: 11434  # Adjust as needed to point to the correct port
+                  port: 11434  # Ensure the correct port for the main API
                 startup:
                   enabled: true
                   type: tcp
-                  port: 11434  # Adjust as needed to point to the correct port
+                  port: 11434  # Ensure the correct port for the main API
       ui:
         enabled: true
         type: Deployment
@@ -124,43 +123,43 @@ spec:
                   enabled: true
                   type: http
                   path: /
-                  port: 10686  # Adjust as needed to point to the correct port
+                  port: 10686  # Ensure the correct port for the UI
                 readiness:
                   enabled: true
                   type: http
                   path: /
-                  port: 10686  # Adjust as needed to point to the correct port
+                  port: 10686  # Ensure the correct port for the UI
                 startup:
                   enabled: true
                   type: tcp
-                  port: 10686  # Adjust as needed to point to the correct port
+                  port: 10686  # Ensure the correct port for the UI
               env:
                 PORT: 10686
-                OLLAMA_BASE_URL: 'http://ollama-api:11434'  # Adjust this URL as needed
+                OLLAMA_BASE_URL: 'http://ollama-api:11434'  # Correct this URL if necessary
                 WEBUI_SECRET_KEY:
                   secretKeyRef:
                     name: ollama-secrets
                     key: WEBUI_SECRET_KEY
-                AUTOMATIC1111_BASE_URL: ""
+                AUTOMATIC1111_BASE_URL: ""  # Add any relevant URL if needed
                 ENABLE_SIGNUP: true
                 DEFAULT_USER_ROLE: "pending"
                 WHISPER_MODEL: "base"
                 RAG_EMBEDDING_MODEL: "all-MiniLM-L6-v2"
                 RAG_EMBEDDING_MODEL_DEVICE_TYPE: "cpu"
-                WEBUI_AUTH_TRUSTED_EMAIL_HEADER: ""
+                WEBUI_AUTH_TRUSTED_EMAIL_HEADER: ""  # Add if required
     persistence:
       config:
         enabled: true
         targetSelector:
           main:
             main:
-              mountPath: "/root/.ollama"
+              mountPath: "/root/.ollama"  # Ensure the correct path for config persistence
       data:
         enabled: true
         targetSelector:
           ui:
             ui:
-              mountPath: "/app/backend/data"
+              mountPath: "/app/backend/data"  # Ensure the correct path for data persistence
     portal:
       open:
         enabled: true
