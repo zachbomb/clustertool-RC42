@@ -6,3 +6,4 @@ resources:
   - networking
   - code-server/ks.yaml
   - home
+  - ollama/ks.yaml
