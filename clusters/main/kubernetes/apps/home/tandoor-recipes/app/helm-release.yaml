@@ -25,6 +25,7 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
+    TZ: America/Los_Angeles
     ingress:
       main:
         enabled: true
