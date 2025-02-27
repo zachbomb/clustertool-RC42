@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 30.4.3
+      version: 30.4.2
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -43,7 +43,7 @@ spec:
                 grafana_dashboard: "1"
     logs:
       general:
-        level: ERROR
+        level: DEBUG
         format: common
       access:
         enabled: true
@@ -51,12 +51,8 @@ spec:
     service:
       main:
         enabled: true
+        loadBalancerIP: ${TRAEFIK_IP}
         type: LoadBalancer
-        loadBalancerIP: ${TRAEFIK-DASHBOARD_IP}
-        ports:
-            main:
-              port: 9000
-              targetPort: 9000 
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}      
     ingress:
@@ -74,9 +70,7 @@ spec:
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
-              - path: /dashboard
-                pathType: Prefix
-              - path: /api
+              - path: /
                 pathType: Prefix
         ingressRoute:
             dashboard:
