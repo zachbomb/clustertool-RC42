@@ -25,7 +25,6 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
-    TZ: America/Los_Angeles
     ingress:
       main:
         enabled: true
@@ -74,17 +73,17 @@ spec:
               enabled: true
             src:
               enabled: true
-#        static:
-#          enabled: true
-#          mountPath: /opt/recipes/staticfiles
-#          volsync:
-#            - name: static
-#              type: restic
-#              credentials: s3
-#              dest:
-#                enabled: true
-#              src:
-#                enabled: true
+        static:
+          enabled: true
+          mountPath: /opt/recipes/staticfiles
+          volsync:
+            - name: static
+              type: restic
+              credentials: s3
+              dest:
+                enabled: true
+              src:
+                enabled: true
     service:
       main:
         enabled: true
