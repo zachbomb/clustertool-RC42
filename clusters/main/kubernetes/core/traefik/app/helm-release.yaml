@@ -49,6 +49,9 @@ spec:
         enabled: true
     defaultCertificate: "wethecommon-wildcard-cert"
     service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: ${TRAEFIK-DASH_IP}
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}
 #      metrics:
