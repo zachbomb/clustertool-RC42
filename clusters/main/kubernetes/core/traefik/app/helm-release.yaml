@@ -51,7 +51,7 @@ spec:
     service:
       main:
         type: LoadBalancer
-        loadBalancerIP: ${TRAEFIK-DASH_IP}
+        loadBalancerIP: ${TRAEFIK_DASH_IP}
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}
 #      metrics:
