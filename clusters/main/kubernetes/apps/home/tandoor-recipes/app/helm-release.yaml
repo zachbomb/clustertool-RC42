@@ -65,7 +65,7 @@ spec:
     service:
       main:
         enabled: true
-        loadBalancerIP: ${T_IP}
+        loadBalancerIP: ${TANDOOR_IP}
         ports:
           enabled: true
           port: 10029
@@ -94,4 +94,5 @@ spec:
             group: Home Automation
             icon: ""
             name: Tandoor
-
+            widget:
+              enabled: false

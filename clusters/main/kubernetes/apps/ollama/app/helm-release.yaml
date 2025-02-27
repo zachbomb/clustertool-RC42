@@ -25,6 +25,35 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
+    ingress:
+      main:
+        enabled: true
+        integrations:
+          traefik:
+            enabled: true
+            middlewares:
+              - name: local
+                namespace: traefik
+          certManager:
+            certificateIssuer: wethecommon-prod-cert
+            enabled: true
+          homepage:
+            description: AI Language Model
+            enabled: true
+            group: Home Automation
+            icon: ""
+            name: Ollama
+            widget:
+              enabled: false
+        hosts:
+          - host: "ollama.${BASE_DOMAIN}"  # Ensure this is set properly or replaced with actual domain
+            paths:
+              - path: /
+                pathType: Prefix
+      api:
+        enabled: false
+        targetSelector:
+          api: api
     service:
       main:
         enabled: true
@@ -48,33 +77,6 @@ spec:
             port: 11434
             targetSelector: main
         type: LoadBalancer
-    ingress:
-      ui:
-        enabled: true
-        integrations:
-          traefik:
-            enabled: true
-            middlewares:
-              - name: local
-                namespace: traefik
-          certManager:
-            certificateIssuer: wethecommon-prod-cert
-            enabled: true
-          homepage:
-            description: AI Language Model
-            enabled: true
-            group: Home Automation
-            icon: ""
-            name: Ollama
-        hosts:
-          - host: "ollama.${BASE_DOMAIN}"  # Ensure this is set properly or replaced with actual domain
-            paths:
-              - path: /
-                pathType: Prefix
-      api:
-        enabled: false
-        targetSelector:
-          api: api
     ollama:
       registration:
         enabled: true
