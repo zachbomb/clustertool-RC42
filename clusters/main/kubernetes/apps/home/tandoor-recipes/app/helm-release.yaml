@@ -26,6 +26,31 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
+    ingress:
+      main:
+        enabled: true
+        integrations:
+          traefik:
+            enabled: true
+            middlewares:
+              - name: local
+                namespace: traefik
+          certManager:
+            enabled: true
+            certificateIssuer: wethecommon-prod-cert
+          homepage:
+            description: Recipe Organizer
+            enabled: true
+            group: Home Automation
+            icon: ""
+            name: Tandoor
+            widget:
+              enabled: false
+        hosts:
+          - host: "tandoor.${BASE_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
     persistence:
       config:
         enabled: true
@@ -71,28 +96,4 @@ spec:
           port: 10029
           targetPort: 10029
         type: LoadBalancer
-    ingress:
-      main:
-        enabled: true
-        hosts:
-          - host: "tandoor.${BASE_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        integrations:
-          traefik:
-            enabled: true
-            middlewares:
-              - name: local
-                namespace: traefik
-          certManager:
-            enabled: true
-            certificateIssuer: wethecommon-prod-cert
-          homepage:
-            description: Recipe Organizer
-            enabled: true
-            group: Home Automation
-            icon: ""
-            name: Tandoor
-            widget:
-              enabled: false
+
