@@ -40,7 +40,7 @@ spec:
           homepage:
             description: AI Language Model
             enabled: true
-            group: Home Automation
+            group: Lifestyle & Home
             icon: ""
             name: Ollama
             widget:
