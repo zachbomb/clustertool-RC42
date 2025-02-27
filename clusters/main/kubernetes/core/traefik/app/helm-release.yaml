@@ -54,7 +54,11 @@ spec:
         loadBalancerIP: ${TRAEFIK_IP}
         type: LoadBalancer
       tcp:
-        loadBalancerIP: ${TRAEFIK_IP}      
+        loadBalancerIP: ${TRAEFIK_IP}
+      metrics:
+        enabled: true
+        loadBalancerIP: ${TRAEFIK_IP}
+        type: LoadBalancer         
     ingress:
       main:
         enabled: true
