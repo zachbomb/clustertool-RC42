@@ -40,7 +40,7 @@ spec:
           homepage:
             description: Recipe Organizer
             enabled: true
-            group: Home Automation
+            group: Lifestyle & Home
             icon: ""
             name: Tandoor
             widget:
