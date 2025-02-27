@@ -49,8 +49,10 @@ spec:
         enabled: true
     defaultCertificate: "wethecommon-wildcard-cert"
     service:
+      main:
+        loadBalancerIP: ${TRAEFIK_IP}        
       tcp:
-        loadBalancerIP: ${TRAEFIK_IP}
+        loadBalancerIP: ${TRAEFIK_IP}      
     ingress:
       main:
         enabled: true
