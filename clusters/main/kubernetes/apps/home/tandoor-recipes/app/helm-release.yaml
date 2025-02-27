@@ -14,7 +14,6 @@ spec:
         kind: HelmRepository
         name: truecharts
         namespace: flux-system
-      interval: 15m
   timeout: 20m
   releaseName: tandoor-recipes
   values:
@@ -33,8 +32,8 @@ spec:
           traefik:
             enabled: true
             middlewares:
-              - name: local
-                namespace: traefik
+             - name: local
+               namespace: traefik
           certManager:
             enabled: true
             certificateIssuer: wethecommon-prod-cert
@@ -92,8 +91,8 @@ spec:
         enabled: true
         loadBalancerIP: ${TANDOOR_IP}
         ports:
-          enabled: true
-          port: 10029
-          targetPort: 10029
+          main:
+            port: 10029
+            targetPort: 10029
         type: LoadBalancer
 
