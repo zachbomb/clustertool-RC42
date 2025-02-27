@@ -53,20 +53,37 @@ spec:
     persistence:
       config:
         enabled: true
-        main:
-          enabled: true
-          mountPath: /config
-          volsync:
-          - name: config
+        mountPath: /config
+        volsync:
+        - name: config
+          type: restic
+          credentials: s3
+          dest:
+            enabled: true
+          src:
+            enabled: true
+      media:
+        enabled: true
+        mountPath: /opt/recipes/mediafiles
+        volsync:
+          - name: media
             type: restic
             credentials: s3
             dest:
               enabled: true
             src:
               enabled: true
-      media:
-        enabled: true
-        mountPath: /opt/recipes/mediafiles
+#        static:
+#          enabled: true
+#          mountPath: /opt/recipes/staticfiles
+#          volsync:
+#            - name: static
+#              type: restic
+#              credentials: s3
+#              dest:
+#                enabled: true
+#              src:
+#                enabled: true
     service:
       main:
         enabled: true
