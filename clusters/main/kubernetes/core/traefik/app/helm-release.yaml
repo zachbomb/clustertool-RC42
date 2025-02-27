@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 30.4.2
+      version: 30.4.3
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -49,28 +49,22 @@ spec:
         enabled: true
     defaultCertificate: "wethecommon-wildcard-cert"
     service:
-      main:
-        enabled: true
-        loadBalancerIP: ${TRAEFIK_IP}
-        type: LoadBalancer
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}
-      metrics:
-        enabled: true
-        loadBalancerIP: ${TRAEFIK_IP}
-        type: LoadBalancer         
+#      metrics:
+#        enabled: true
+#        loadBalancerIP: ${TRAEFIK-DASH_IP}
+#        type: LoadBalancer         
     ingress:
       main:
         enabled: true
         integrations:
           traefik:
             enabled: true
-            middlewares:
-              - name: local
-                namespace: traefik
-          certManager:
-            certificateIssuer: wethecommon-prod-cert
-            enabled: true
+        tls:
+          - hosts:
+              - traefik-dashboard.${BASE_DOMAIN}
+            clusterIssuer: wethecommon-prod-cert
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
