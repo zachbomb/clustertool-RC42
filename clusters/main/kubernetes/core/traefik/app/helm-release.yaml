@@ -50,7 +50,13 @@ spec:
     defaultCertificate: "wethecommon-wildcard-cert"
     service:
       main:
-        loadBalancerIP: ${TRAEFIK_IP}        
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: ${TRAEFIK-DASHBOARD_IP}
+        ports:
+            main:
+              port: 9000
+              targetPort: 9000 
       tcp:
         loadBalancerIP: ${TRAEFIK_IP}      
     ingress:
