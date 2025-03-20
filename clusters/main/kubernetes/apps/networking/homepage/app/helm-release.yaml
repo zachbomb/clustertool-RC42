@@ -26,7 +26,10 @@ spec:
               secretKey: "${S3KEY}"
               encrKey: "${S3KEY}"
         TZ: America/Los_Angeles
-        HOMEPAGE_ALLOWED_HOSTS: homepage."${BASE_DOMAIN}"
+        containers:
+            main:
+              env:
+                HOMEPAGE_ALLOWED_HOSTS: "homepage.${BASE_DOMAIN}"
         ingress:
             main:
                 enabled: true
