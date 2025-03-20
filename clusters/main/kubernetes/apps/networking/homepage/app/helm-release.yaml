@@ -26,10 +26,13 @@ spec:
               secretKey: "${S3KEY}"
               encrKey: "${S3KEY}"
         TZ: America/Los_Angeles
-        containers:
+        workload:
             main:
-              env:
-                HOMEPAGE_ALLOWED_HOSTS: "homepage.${BASE_DOMAIN}"
+              podSpec:
+                containers:
+                  main:
+                    env:
+                      HOMEPAGE_ALLOWED_HOSTS: homepage.${BASE_DOMAIN}
         ingress:
             main:
                 enabled: true
