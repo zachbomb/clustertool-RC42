@@ -64,10 +64,10 @@ spec:
         integrations:
           traefik:
             enabled: true
-        tls:
-          - hosts:
-              - traefik-dashboard.${BASE_DOMAIN}
-            clusterIssuer: wethecommon-prod-cert
+#        tls:
+#          - hosts:
+#              - traefik-dashboard.${BASE_DOMAIN}
+#            clusterIssuer: wethecommon-prod-cert
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
