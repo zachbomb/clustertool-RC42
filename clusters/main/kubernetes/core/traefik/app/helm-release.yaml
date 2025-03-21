@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -30,8 +29,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    ## set stopAll to "true" if you do not want to use traefik
-    # and/or disable its service
     global:
       stopAll: false
     configmap:
@@ -51,13 +48,9 @@ spec:
     service:
       main:
         type: LoadBalancer
-        loadBalancerIP: ${TRAEFIK_DASH_IP}
+        loadBalancerIP: ${TRAEFIK_DASH_IP}  
       tcp:
-        loadBalancerIP: ${TRAEFIK_IP}
-#      metrics:
-#        enabled: true
-#        loadBalancerIP: ${TRAEFIK-DASH_IP}
-#        type: LoadBalancer         
+        loadBalancerIP: ${TRAEFIK_IP}  
     ingress:
       main:
         enabled: true
@@ -74,7 +67,6 @@ spec:
               - traefik-dashboard.${BASE_DOMAIN}
             clusterIssuer: wethecommon-prod-cert
             secretName: homepage-tls
-                
     middlewares:
       ipWhiteList:
         - name: local
@@ -86,7 +78,6 @@ spec:
             - 192.168.30.0/24
             - 192.168.3.0/24
             - 192.168.9.0/24
-
     persistence:
       crowdsec-bouncer-tls:
         enabled: false
