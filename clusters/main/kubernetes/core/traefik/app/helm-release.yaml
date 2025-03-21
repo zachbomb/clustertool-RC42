@@ -64,17 +64,16 @@ spec:
         integrations:
           traefik:
             enabled: true
-        tls:
-          - hosts:
-              - traefik-dashboard.${BASE_DOMAIN}
-            clusterIssuer: wethecommon-prod-cert
-            secretName: homepage-tls
-
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
+        tls:
+          - hosts:
+              - traefik-dashboard.${BASE_DOMAIN}
+            clusterIssuer: wethecommon-prod-cert
+            secretName: homepage-tls
                 
     middlewares:
       ipWhiteList:
