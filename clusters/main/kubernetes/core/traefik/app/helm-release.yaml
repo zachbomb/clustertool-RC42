@@ -32,7 +32,6 @@ spec:
     deployment:
       enabled: true
       replicas: 2
-    defaultCertificate: "wethecommon-wildcard-cert"
     service:
       enabled: true
       type: LoadBalancer
@@ -62,7 +61,7 @@ spec:
         allowExternalNameServices: true
     tlsStore:
       default:
-        defaultCertificate:
+        defaultCertificate: "wethecommon-wildcard-cert"
         secretName: "${BASE_DOMAIN}-tls"
     ports:
       traefik:
@@ -81,18 +80,19 @@ spec:
         integrations:
           traefik:
             enabled: true
-            entrypoints:
-            - websecure  
+            middlewares:
+              - name: local
+                namespace: traefik
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
-        tls:
-          - hosts:
-              - traefik-dashboard.${BASE_DOMAIN}
-            clusterIssuer: wethecommon-prod-cert
-            secretName: traefik-tls
+#        tls:
+#          - hosts:
+#              - traefik-dashboard.${BASE_DOMAIN}
+#            clusterIssuer: wethecommon-prod-cert
+#            secretName: traefik-tls
       middlewares:
         ipWhiteList:
           - name: local
