@@ -67,8 +67,9 @@ spec:
         tls:
           - hosts:
               - traefik-dashboard.${BASE_DOMAIN}
-            secretName: homepage-tls
             clusterIssuer: wethecommon-prod-cert
+            secretName: homepage-tls
+
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
