@@ -80,7 +80,9 @@ spec:
         enabled: true
         integrations:
           traefik:
-            enabled: false
+            enabled: true
+            entrypoints:
+            - websecure  
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
@@ -90,7 +92,7 @@ spec:
           - hosts:
               - traefik-dashboard.${BASE_DOMAIN}
             clusterIssuer: wethecommon-prod-cert
-            secretName: homepage-tls
+            secretName: traefik-tls
       middlewares:
         ipWhiteList:
           - name: local
