@@ -29,28 +29,52 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    global:
-      stopAll: false
-    configmap:
-        dashboard:
-            data:
-                traefik.json: '{{ .Files.Get "dashboard.json" | indent 8 }}'
-            enabled: true
-            labels:
-                grafana_dashboard: "1"
-    logs:
-      general:
-        level: DEBUG
-        format: common
-      access:
-        enabled: true
+    deployment:
+      enabled: true
+      replicas: 2
     defaultCertificate: "wethecommon-wildcard-cert"
     service:
-      main:
-        type: LoadBalancer
-        loadBalancerIP: ${TRAEFIK_DASH_IP}  
-      tcp:
-        loadBalancerIP: ${TRAEFIK_IP}  
+      enabled: true
+      type: LoadBalancer
+      annotations:
+        metallb.io/ip-allocated-from-pool: main
+        metallb.io/loadBalancerIPs: ${TRAEFIK_IP}
+        metallb.universe.tf/ip-allocated-from-pool: main
+      spec:
+        externalTrafficPolicy: Local
+    logs:
+      general:
+        level: INFO
+      access:
+        enabled: true
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+    tlsOptions:
+      default:
+        minVersion: VersionTLS12
+        maxVersion: VersionTLS13
+        sniStrict: true
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+    tlsStore:
+      default:
+        defaultCertificate:
+        secretName: "${BASE_DOMAIN}-tls"
+    ports:
+      traefik:
+        expose:
+          default: true
+      web:
+        redirections:
+          port: websecure
+      websecure:
+        tls:
+          enabled: true
+          options: "default"
     ingress:
       main:
         enabled: true
@@ -67,17 +91,17 @@ spec:
               - traefik-dashboard.${BASE_DOMAIN}
             clusterIssuer: wethecommon-prod-cert
             secretName: homepage-tls
-    middlewares:
-      ipWhiteList:
-        - name: local
-          sourceRange:
-            - 172.16.0.0/16
-            - 172.17.0.0/16
-            - 192.168.10.0/24
-            - 192.168.20.0/24
-            - 192.168.30.0/24
-            - 192.168.3.0/24
-            - 192.168.9.0/24
-    persistence:
-      crowdsec-bouncer-tls:
-        enabled: false
+      middlewares:
+        ipWhiteList:
+          - name: local
+            sourceRange:
+              - 172.16.0.0/16
+              - 172.17.0.0/16
+              - 192.168.10.0/24
+              - 192.168.20.0/24
+              - 192.168.30.0/24
+              - 192.168.3.0/24
+              - 192.168.9.0/24
+      persistence:
+        crowdsec-bouncer-tls:
+          enabled: false
