@@ -77,7 +77,7 @@ spec:
           options: "default"
     ingress:
       main:
-        enabled: true
+        enabled: false
         integrations:
           traefik:
             enabled: true
