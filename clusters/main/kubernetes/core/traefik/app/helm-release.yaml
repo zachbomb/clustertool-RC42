@@ -44,7 +44,7 @@ spec:
         externalTrafficPolicy: Local
     logs:
       general:
-        level: INFO
+        level: DEBUG
       access:
         enabled: true
     ingressClass:
@@ -69,12 +69,14 @@ spec:
         expose:
           default: true
       web:
-        redirections:
-          port: websecure
+        expose: true
       websecure:
+        expose: true
         tls:
           enabled: true
           options: "default"
+        redirections:
+          entryPoint: web
     ingress:
       main:
         enabled: true
