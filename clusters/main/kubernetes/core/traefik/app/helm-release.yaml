@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -52,6 +51,11 @@ spec:
           enabled: true
           port: 443
           protocol: https
+          tls:
+            enabled: true
+            options: "default"
+          redirections:
+            entryPoint: web
     logs:
       general:
         level: DEBUG
@@ -74,16 +78,6 @@ spec:
       default:
         defaultCertificate: "wethecommon-wildcard-cert"
         secretName: "${BASE_DOMAIN}-tls"
-    ports:
-      web:
-        expose: true
-      websecure:
-        expose: true
-        tls:
-          enabled: true
-          options: "default"
-        redirections:
-          entryPoint: web
     ingress:
       main:
         enabled: true
@@ -94,16 +88,9 @@ spec:
               - path: /
                 pathType: Prefix
         integrations:
-          traefik:
-            enabled: false
-            middlewares:
-              - name: local
-                namespace: traefik
-              - name: traefik-dash
-                namespace: traefik
           certManager:
             enabled: true
-            certificateIssuer: wethecommon-prod-cert 
+            certificateIssuer: wethecommon-prod-cert
           homepage:
             enabled: true
             group: "Networking"
@@ -121,4 +108,3 @@ spec:
     persistence:
       crowdsec-bouncer-tls:
         enabled: false
-
