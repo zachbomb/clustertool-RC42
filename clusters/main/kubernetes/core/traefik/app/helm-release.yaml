@@ -43,8 +43,7 @@ spec:
         externalTrafficPolicy: Local
     logs:
       general:
-        level: ERROR
-        format: common
+        level: INFO
       access:
         enabled: true
     ingressClass:
@@ -80,38 +79,19 @@ spec:
         enabled: false
         integrations:
           traefik:
-            enabled: false
-            middlewares:
-              - name: local
-                namespace: traefik
+            enabled: true
+            entrypoints:
+            - websecure  
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
-#        tls:
-#          - hosts:
-#              - traefik-dashboard.${BASE_DOMAIN}
-#            clusterIssuer: wethecommon-prod-cert
-#            secretName: traefik-tls
-        ingressRoute:
-          dashboard:
-            enabled: true
-      persistence:
-       crowdsec-bouncer-tls:
-         enabled: '{{ if .Values.middlewares.bouncer }}true{{ else }}false{{ end }}'
-         expandObjectName: false
-         mountPath: /etc/traefik/crowdsec-certs
-         objectName: crowdsec-bouncer-tls
-         type: secret
-       plugins:
-         enabled: true
-         mountPath: /plugins-storage
-         type: emptyDir
-      podOptions:
-       automountServiceAccountToken: true
-       portalhook:
-         enabled: true
+        tls:
+          - hosts:
+              - traefik-dashboard.${BASE_DOMAIN}
+            clusterIssuer: wethecommon-prod-cert
+            secretName: traefik-tls
       middlewares:
         ipWhiteList:
           - name: local
@@ -123,23 +103,6 @@ spec:
               - 192.168.30.0/24
               - 192.168.3.0/24
               - 192.168.9.0/24
-        bouncer:
-          - name: bouncer
-            enabled: true
-            logLevel: INFO
-            crowdsecMode: stream
-            crowdsecLapiScheme: https
-            crowdsecLapiHost: crowdsec-service.crowdsec:8080
-            crowdsecLapiKey: ${CS_LAPI_KEY}
-            forwardedHeadersTrustedIPs:
-              - 172.16.0.0/16
-              - 172.17.0.0/16
-              - 192.168.0.0/24
-               #forwardedHeadersCustomName: X-Forwarded-For
-            clientTrustedIPs:
-              - 192.168.10.0/24
-              - 192.168.3.0/24
-              - 192.168.9.0/24
-            crowdsecLapiTLSCertificateAuthorityFile: /etc/traefik/crowdsec-certs/ca.crt
-            crowdsecLapiTLSCertificateBouncerFile: /etc/traefik/crowdsec-certs/tls.crt
-            crowdsecLapiTLSCertificateBouncerKeyFile: /etc/traefik/crowdsec-certs/tls.key
+      persistence:
+        crowdsec-bouncer-tls:
+          enabled: false
