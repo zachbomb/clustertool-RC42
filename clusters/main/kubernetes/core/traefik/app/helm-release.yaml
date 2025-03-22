@@ -76,13 +76,10 @@ spec:
           options: "default"
     ingress:
       main:
-        enabled: false
+        enabled: true
         integrations:
           traefik:
             enabled: false
-            middlewares:
-              - name: local
-                namespace: traefik
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
