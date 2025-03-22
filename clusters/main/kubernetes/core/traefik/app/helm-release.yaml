@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -29,67 +30,61 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    deployment:
-      enabled: true
-      replicas: 2
+    ## set stopAll to "true" if you do not want to use traefik
+    # and/or disable its service
+    global:
+      stopAll: false
     service:
-      enabled: true
-      type: LoadBalancer
-      annotations:
-        metallb.io/ip-allocated-from-pool: main
-        metallb.io/loadBalancerIPs: ${TRAEFIK_IP}
-        metallb.universe.tf/ip-allocated-from-pool: main
-      spec:
+      tcp:
+        loadBalancerIP: ${TRAEFIK_IP}
         externalTrafficPolicy: Local
-    logs:
-      general:
-        level: INFO
-      access:
-        enabled: true
-    ingressClass:
-      enabled: true
-      isDefaultClass: true
-    tlsOptions:
-      default:
-        minVersion: VersionTLS12
-        maxVersion: VersionTLS13
-        sniStrict: true
-    providers:
-      kubernetesCRD:
-        enabled: true
-        allowCrossNamespace: true
-        allowExternalNameServices: true
-    tlsStore:
-      default:
-        defaultCertificate: "wethecommon-wildcard-cert"
-        secretName: "${BASE_DOMAIN}-tls"
-    ports:
-      traefik:
-        expose:
-          default: true
-      web:
-        redirections:
-          port: websecure
-      websecure:
-        tls:
-          enabled: true
-          options: "default"
+        ports:
+          web:
+            enabled: true
+            port: 80
+            protocol: http
+            redirectTo: websecure
+          websecure:
+            enabled: true
+            port: 443
+            protocol: https
+            # -- Configure (Forwarded Headers)[https://doc.traefik.io/traefik/routing/entrypoints/#forwarded-headers] Support
+            forwardedHeaders:
+              enabled: false
+              # -- List of trusted IP and CIDR references
+              trustedIPs: []
+              # -- Trust all forwarded headers
+              insecureMode: false
+            # -- Configure (Proxy Protocol Headers)[https://doc.traefik.io/traefik/routing/entrypoints/#proxyprotocol] Support
+            proxyProtocol:
+              enabled: false
+              # -- Only IPs in trustedIPs will lead to remote client address replacement
+              trustedIPs: []
+              # -- Trust every incoming connection
+              insecureMode: false
     ingress:
       main:
         enabled: true
-        integrations:
-          traefik:
-            enabled: false
+        ingressClassName: ""
         hosts:
-          - host: traefik-dashboard.${BASE_DOMAIN}
+          - host: traefik.${BASE_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
-        tls:
-          - hosts:
-              - traefik-dashboard.${BASE_DOMAIN}
-            clusterIssuer: wethecommon-prod-cert
-            secretName: traefik-tls
+        integrations:
+          traefik:
+            enabled: true
+            middlewares:
+              - name: local
+                namespace: traefik
+              - name: traefik-dash
+                namespace: traefik
+          certManager:
+            enabled: true
+            certificateIssuer: wethecommon-prod-cert 
+          homepage:
+            enabled: true
+            group: "Networking"
       middlewares:
         ipWhiteList:
           - name: local
@@ -104,3 +99,4 @@ spec:
       persistence:
         crowdsec-bouncer-tls:
           enabled: false
+
