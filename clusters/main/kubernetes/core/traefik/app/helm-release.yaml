@@ -30,38 +30,51 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    ## set stopAll to "true" if you do not want to use traefik
-    # and/or disable its service
-    global:
-      stopAll: false
+    deployment:
+      enabled: true
+      replicas: 2
     service:
-      tcp:
-        loadBalancerIP: ${TRAEFIK_IP}
+      enabled: true
+      type: LoadBalancer
+      annotations:
+        metallb.io/ip-allocated-from-pool: main
+        metallb.io/loadBalancerIPs: ${TRAEFIK_IP}
+        metallb.universe.tf/ip-allocated-from-pool: main
+      spec:
         externalTrafficPolicy: Local
-        ports:
-          web:
-            enabled: true
-            port: 80
-            protocol: http
-            redirectTo: websecure
-          websecure:
-            enabled: true
-            port: 443
-            protocol: https
-            # -- Configure (Forwarded Headers)[https://doc.traefik.io/traefik/routing/entrypoints/#forwarded-headers] Support
-            forwardedHeaders:
-              enabled: false
-              # -- List of trusted IP and CIDR references
-              trustedIPs: []
-              # -- Trust all forwarded headers
-              insecureMode: false
-            # -- Configure (Proxy Protocol Headers)[https://doc.traefik.io/traefik/routing/entrypoints/#proxyprotocol] Support
-            proxyProtocol:
-              enabled: false
-              # -- Only IPs in trustedIPs will lead to remote client address replacement
-              trustedIPs: []
-              # -- Trust every incoming connection
-              insecureMode: false
+    logs:
+      general:
+        level: INFO
+      access:
+        enabled: true
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+    tlsOptions:
+      default:
+        minVersion: VersionTLS12
+        maxVersion: VersionTLS13
+        sniStrict: true
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+    tlsStore:
+      default:
+        defaultCertificate: "wethecommon-wildcard-cert"
+        secretName: "${BASE_DOMAIN}-tls"
+    ports:
+      traefik:
+        expose:
+          default: true
+      web:
+        redirections:
+          port: websecure
+      websecure:
+        tls:
+          enabled: true
+          options: "default"
     ingress:
       main:
         enabled: true
