@@ -85,18 +85,18 @@ spec:
           homepage:
             enabled: true
             group: "Networking"
-      middlewares:
-        ipWhiteList:
-          - name: local
-            sourceRange:
-              - 172.16.0.0/16
-              - 172.17.0.0/16
-              - 192.168.10.0/24
-              - 192.168.20.0/24
-              - 192.168.30.0/24
-              - 192.168.3.0/24
-              - 192.168.9.0/24
-      persistence:
-        crowdsec-bouncer-tls:
-          enabled: false
+    middlewares:
+      ipWhiteList:
+        - name: local
+          sourceRange:
+            - 172.16.0.0/16
+            - 172.17.0.0/16
+            - 192.168.10.0/24
+            - 192.168.20.0/24
+            - 192.168.30.0/24
+            - 192.168.3.0/24
+            - 192.168.9.0/24
+    persistence:
+      crowdsec-bouncer-tls:
+        enabled: false
 
