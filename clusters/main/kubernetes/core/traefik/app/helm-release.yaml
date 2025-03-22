@@ -77,7 +77,7 @@ spec:
           options: "default"
     ingress:
       main:
-        enabled: false
+        enabled: true
         integrations:
           traefik:
             enabled: true
@@ -87,9 +87,7 @@ spec:
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
-              - path: /dashboard
-                pathType: Prefix
-              - path: /api
+              - path: /
                 pathType: Prefix
 #        tls:
 #          - hosts:
@@ -136,7 +134,7 @@ spec:
             forwardedHeadersTrustedIPs:
               - 172.16.0.0/16
               - 172.17.0.0/16
-              - 192.168.0.0/16
+              - 192.168.0.0/24
                #forwardedHeadersCustomName: X-Forwarded-For
             clientTrustedIPs:
               - 192.168.10.0/24
