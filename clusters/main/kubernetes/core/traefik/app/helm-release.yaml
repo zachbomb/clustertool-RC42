@@ -79,9 +79,10 @@ spec:
         enabled: false
         integrations:
           traefik:
-            enabled: true
-            entrypoints:
-            - websecure  
+            enabled: false
+            middlewares:
+              - name: local
+                namespace: traefik
         hosts:
           - host: traefik-dashboard.${BASE_DOMAIN}
             paths:
