@@ -65,9 +65,6 @@ spec:
         defaultCertificate: "wethecommon-wildcard-cert"
         secretName: "${BASE_DOMAIN}-tls"
     ports:
-      traefik:
-        expose:
-          default: true
       web:
         expose: true
       websecure:
