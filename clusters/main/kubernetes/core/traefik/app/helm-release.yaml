@@ -29,71 +29,14 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    deployment:
-      enabled: true
-      replicas: 2
+    ## set stopAll to "true" if you do not want to use traefik
+    # and/or disable its service
+    global:
+      stopAll: false
+    defaultCertificate: "wethecommon-wildcard-cert"
     service:
-      enabled: true
-      type: LoadBalancer
-      annotations:
-        metallb.io/ip-allocated-from-pool: main
-        metallb.io/loadBalancerIPs: ${TRAEFIK_IP}
-        metallb.universe.tf/ip-allocated-from-pool: main
-      spec:
-        externalTrafficPolicy: Local
-      ports:
-        web:
-          enabled: true
-          port: 80
-          protocol: http
-          redirectTo: websecure
-        websecure:
-          enabled: true
-          port: 443
-          protocol: https
-          tls:
-            enabled: true
-            options: "default"
-          redirections:
-            entryPoint: web
-    logs:
-      general:
-        level: DEBUG
-      access:
-        enabled: true
-    ingressClass:
-      enabled: true
-      isDefaultClass: true
-    tlsOptions:
-      default:
-        minVersion: VersionTLS12
-        maxVersion: VersionTLS13
-        sniStrict: true
-    providers:
-      kubernetesCRD:
-        enabled: true
-        allowCrossNamespace: true
-        allowExternalNameServices: true
-    tlsStore:
-      default:
-        defaultCertificate: "wethecommon-wildcard-cert"
-        secretName: "${BASE_DOMAIN}-tls"
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: ""
-        hosts:
-          - host: traefik-dashboard.${BASE_DOMAIN}
-            paths:
-              - path: /
-                pathType: Prefix
-        integrations:
-          certManager:
-            enabled: true
-            certificateIssuer: wethecommon-prod-cert
-          homepage:
-            enabled: true
-            group: "Networking"
+      tcp:
+        loadBalancerIP: ${TRAEFIK_IP}
     middlewares:
       ipWhiteList:
         - name: local
@@ -105,6 +48,3 @@ spec:
             - 192.168.30.0/24
             - 192.168.3.0/24
             - 192.168.9.0/24
-    persistence:
-      crowdsec-bouncer-tls:
-        enabled: false
