@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 30.4.3
+      version: 30.4.2
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -48,3 +48,4 @@ spec:
             - 192.168.30.0/24
             - 192.168.3.0/24
             - 192.168.9.0/24
+            - 192.168.8.0/24
