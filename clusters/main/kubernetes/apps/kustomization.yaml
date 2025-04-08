@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
   - media
-  - networking
   - code-server/ks.yaml
   - home
   - ollama/ks.yaml

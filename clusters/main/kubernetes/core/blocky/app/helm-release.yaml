@@ -29,13 +29,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    TZ: America/Los_Angeles
     ## set stopAll to "true" if you do not want to use blocky
     # and/or disable its service
     global:
       stopAll: false
-    bootstrapDns:
-      upstream: 192.168.10.3
     service:
       dns:
         externalTrafficPolicy: Local
