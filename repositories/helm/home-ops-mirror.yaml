@@ -3,10 +3,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: ingress-nginx
+  name: home-ops-mirror
   namespace: flux-system
 spec:
-  ## TODO: move to OCI
-  # type: oci
-  interval: 5m
-  url: https://kubernetes.github.io/ingress-nginx
+  type: oci
+  interval: 2h
+  url: oci://ghcr.io/home-operations/charts-mirror
