@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/main/kubernetes/apps/networking/proxmox/app
+  path: clusters/main/kubernetes/networking/proxmox/app
   prune: true
   sourceRef:
     kind: GitRepository
