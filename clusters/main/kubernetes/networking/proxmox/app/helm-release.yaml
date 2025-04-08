@@ -17,6 +17,16 @@ spec:
                 namespace: flux-system
     releaseName: proxmox
     values:
+        service:
+            main:
+                enabled: true
+                type: ExternalIP
+                externalIP: 192.168.10.30
+                ports:
+                    main:
+                        enabled: true
+                        port: 8006
+                        protocol: http
         ingress:
             main:
                 enabled: true
@@ -32,7 +42,7 @@ spec:
 #                    secretName: proxmox-tls
                 integrations:
                     traefik:
-                        enabled: true
+                        enabled: false
                         middlewares:
                             - name: local
                               namespace: traefik
@@ -41,21 +51,5 @@ spec:
                         certificateIssuer: wethecommon-prod-cert
                     homepage:
                         enabled: false
-        release_name: proxmox
-        service:
-            main:
-                enabled: true
-                externalIP: 192.168.10.30
-                ports:
-                    main:
-                        enabled: true
-                        port: 8006
-                        protocol: https
-                type: ExternalIP
-                useSlice: false
-        workload:
-            main:
-                enabled: false
-                podSpec:
-                    containers:
-                        main: {}
+
+
