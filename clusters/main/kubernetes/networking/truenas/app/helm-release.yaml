@@ -17,6 +17,14 @@ spec:
                 namespace: flux-system
     releaseName: truenas
     values:
+        service:
+            main:
+                type: ExternalIP
+                externalIP: 192.168.10.122
+                ports:
+                    main:
+                        protocol: https
+                        port: 444
         ingress:
             main:
                 enabled: true
@@ -31,31 +39,6 @@ spec:
 #                        - truenas.${BASE_DOMAIN}
 #                    secretName: truenas-tls
                 integrations:
-                    traefik:
-                        enabled: false
-                        middlewares:
-                            - name: local
-                              namespace: traefik
                     certManager:
                         enabled: true
                         certificateIssuer: wethecommon-prod-cert
-                    homepage:
-                        enabled: false
-        release_name: truenas
-        service:
-            main:
-                enabled: true
-                externalIP: 192.168.10.122
-                ports:
-                    main:
-                        enabled: true
-                        port: 444
-                        protocol: https
-                type: ExternalIP
-                useSlice: false
-        workload:
-            main:
-                enabled: false
-                podSpec:
-                    containers:
-                        main: {}
