@@ -20,6 +20,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
                 hosts:
                     - host: minio.${BASE_DOMAIN}
                       paths:
