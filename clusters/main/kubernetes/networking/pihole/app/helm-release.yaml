@@ -23,7 +23,7 @@ spec:
                 ingressClassName: internal
                 integrations:
                     traefik:
-                        enabled: true
+                        enabled: false
                         middlewares:
                             - name: local
                               namespace: traefik
@@ -35,7 +35,7 @@ spec:
                 hosts:
                     - host: pihole.${BASE_DOMAIN}
                       paths:
-                        - path: /
+                        - path: /admin
                           pathType: Prefix
 #                tls:
 #                    hosts:
