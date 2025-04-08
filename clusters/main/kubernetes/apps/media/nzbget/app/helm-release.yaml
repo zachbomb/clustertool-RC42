@@ -30,6 +30,7 @@ spec:
         ingress:
             main:
                 enabled: true
+                ingressClassName: internal
                 hosts:
                     - host: "nzbget.${BASE_DOMAIN}"
                       paths:
