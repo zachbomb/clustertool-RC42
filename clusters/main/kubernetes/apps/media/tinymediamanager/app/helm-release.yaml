@@ -131,7 +131,7 @@ spec:
         service:
             main:
                 enabled: true
-                loadBalancerIP: ""
+                loadBalancerIP: ${TINYMEDIAMANAGER_IP}
                 ports:
                     main:
                         port: 10179
