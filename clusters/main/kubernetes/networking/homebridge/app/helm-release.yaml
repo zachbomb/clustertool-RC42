@@ -43,7 +43,7 @@ spec:
     service:
       main:
         enabled: true
-        externalIP: 192.168.10.190
+        externalIP: 192.168.10.192
         ports:
           main:
             enabled: true
