@@ -40,7 +40,6 @@ spec:
  #                   hosts:
  #                       - host: prowlarr.${BASE_DOMAIN}
  #                     secretName: prowlarr-tls
-        release_name: prowlarr
         service:
             main:
                 enabled: true
