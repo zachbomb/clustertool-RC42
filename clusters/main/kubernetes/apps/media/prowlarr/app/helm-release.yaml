@@ -31,8 +31,6 @@ spec:
                         middlewares:
                             - name: local
                               namespace: traefik
-                        entrypoints:
-                            - websecure
                     certManager:
                         enabled: true
                         certificateIssuer: wethecommon-prod-cert
