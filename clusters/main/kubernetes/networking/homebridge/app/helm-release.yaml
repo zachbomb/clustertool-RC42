@@ -30,7 +30,7 @@ spec:
 #          secretName: homebridge-tls
         integrations:
           traefik:
-            enabled: true
+            enabled: false
             middlewares:
               - name: local
                 namespace: traefik
@@ -43,7 +43,7 @@ spec:
     service:
       main:
         enabled: true
-        externalIP: 192.168.10.198
+        externalIP: 192.168.10.190
         ports:
           main:
             enabled: true
