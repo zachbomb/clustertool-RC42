@@ -25,8 +25,8 @@ spec:
                 ports:
                     main:
                         enabled: true
-                        port: 9696
                         protocol: http
+                        port: 9696
         ingress:
             main:
                 enabled: true
@@ -37,17 +37,6 @@ spec:
                         - path: /
                           pathType: Prefix
                 integrations:
-                    traefik:
-                        enabled: false
-                        middlewares:
-                            - name: local
-                              namespace: traefik
                     certManager:
                         enabled: true
                         certificateIssuer: wethecommon-prod-cert
-        workload:
-            main:
-                enabled: false
-                podSpec:
-                    containers:
-                        main: {}
