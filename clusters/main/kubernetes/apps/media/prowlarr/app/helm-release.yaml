@@ -17,9 +17,20 @@ spec:
                 namespace: flux-system
     releaseName: prowlarr
     values:
+        service:
+            main:
+                enabled: true
+                externalIP: 192.168.10.10
+                ports:
+                    main:
+                        enabled: true
+                        port: 9696
+                        protocol: http
+                type: ExternalIP
+                useSlice: false
         ingress:
             main:
-                enabled: false
+                enabled: true
                 ingressClassName: internal   
                 hosts:
                     - host: prowlarr.${BASE_DOMAIN}
@@ -35,21 +46,6 @@ spec:
                     certManager:
                         enabled: true
                         certificateIssuer: wethecommon-prod-cert
- #               tls:
- #                   hosts:
- #                       - host: prowlarr.${BASE_DOMAIN}
- #                     secretName: prowlarr-tls
-        service:
-            main:
-                enabled: true
-                externalIP: 192.168.10.10
-                ports:
-                    main:
-                        enabled: true
-                        port: 9696
-                        protocol: http
-                type: ExternalIP
-                useSlice: false
         workload:
             main:
                 enabled: false

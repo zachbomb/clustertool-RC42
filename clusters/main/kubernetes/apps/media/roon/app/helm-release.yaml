@@ -19,17 +19,13 @@ spec:
     values:
         ingress:
             main:
-                enabled: false
+                enabled: enable
                 ingressClassName: internal
                 hosts:
                     - host: roon.${BASE_DOMAIN}
                       paths:
                         - path: /
                           pathType: Prefix
-#                tls:
-#                    hosts:
-#                        - roon.${BASE_DOMAIN}
-#                    secretName: roon-tls
                 integrations:
                     traefik:
                         enabled: false

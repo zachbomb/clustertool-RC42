@@ -26,7 +26,7 @@ spec:
                     main:
                         enabled: true
                         protocol: http
-                        port: 80
+                        port: 81
         ingress:
             main:
                 enabled: true
