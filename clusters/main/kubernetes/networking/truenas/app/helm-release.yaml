@@ -19,10 +19,12 @@ spec:
     values:
         service:
             main:
+                enabled: true
                 type: ExternalIP
                 externalIP: 192.168.10.122
                 ports:
                     main:
+                        enabled: true
                         protocol: https
                         port: 444
         ingress:
@@ -34,10 +36,6 @@ spec:
                       paths:
                         - path: /
                           pathType: Prefix
-#                tls:
-#                    hosts:
-#                        - truenas.${BASE_DOMAIN}
-#                    secretName: truenas-tls
                 integrations:
                     certManager:
                         enabled: true
