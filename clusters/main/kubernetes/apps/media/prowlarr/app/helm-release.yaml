@@ -20,14 +20,13 @@ spec:
         service:
             main:
                 enabled: true
+                type: ExternalIP
                 externalIP: 192.168.10.10
                 ports:
                     main:
                         enabled: true
                         port: 9696
                         protocol: http
-                type: ExternalIP
-                useSlice: false
         ingress:
             main:
                 enabled: true
