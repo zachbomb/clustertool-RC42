@@ -29,6 +29,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      defaultDashboardsEnabled: true
+      forceDeployDatasources: true
     crds:
       enabled: true
       upgradeJob:
@@ -37,12 +42,12 @@ spec:
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
       enabled: false
+    kubeProxy:
+      enabled: false
     kubeEtcd:
       service:
         selector:
           component: kube-apiserver
-    kubeProxy:
-      enabled: false
     prometheus:
       ingress:
         enabled: false
@@ -106,8 +111,4 @@ spec:
               replacement: $1
               sourceLabels: ["__meta_kubernetes_pod_node_name"]
               targetLabel: kubernetes_node
-    grafana:
-      enabled: false
-      forceDeployDashboards: true
-      defaultDashboardsEnabled: true
-      forceDeployDatasources: true
+
