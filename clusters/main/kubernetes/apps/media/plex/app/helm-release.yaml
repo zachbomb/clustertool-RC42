@@ -208,5 +208,11 @@ spec:
                                 startup:
                                     enabled: true
                                     path: /identity
+                        debug:
+                            name: debug
+                            image: busybox
+                            command: ["sh", "-c", "sleep infinity"]
+                            stdin: true
+                            tty: true           
                 replicas: 1
                 type: Deployment
