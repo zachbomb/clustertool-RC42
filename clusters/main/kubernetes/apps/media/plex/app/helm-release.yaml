@@ -221,6 +221,9 @@ spec:
                                 readiness:
                                     enabled: false
                                 startup:
-                                    enabled: false          
+                                    enabled: false
+                            volumeMounts:
+                                - mountPath: /config
+                                  name: config          
                 replicas: 1
                 type: Deployment
