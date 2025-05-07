@@ -209,6 +209,7 @@ spec:
                                     enabled: true
                                     path: /identity
                         debug:
+                            enabled: true
                             name: debug
                             image: busybox
                             command: ["sh", "-c", "sleep infinity"]
