@@ -207,23 +207,6 @@ spec:
                                     path: /identity
                                 startup:
                                     enabled: true
-                                    path: /identity
-                        debug:
-                            enabled: true
-                            name: debug
-                            image: busybox
-                            command: ["sh", "-c", "sleep infinity"]
-                            stdin: true
-                            tty: true
-                            probes:
-                                liveness:
-                                    enabled: false
-                                readiness:
-                                    enabled: false
-                                startup:
-                                    enabled: false
-                            volumeMounts:
-                                - mountPath: /config
-                                  name: config          
+                                    path: /identity        
                 replicas: 1
                 type: Deployment
