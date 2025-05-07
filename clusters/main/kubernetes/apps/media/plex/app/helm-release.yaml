@@ -214,6 +214,13 @@ spec:
                             image: busybox
                             command: ["sh", "-c", "sleep infinity"]
                             stdin: true
-                            tty: true           
+                            tty: true
+                            probes:
+                                liveness:
+                                    enabled: false
+                                readiness:
+                                    enabled: false
+                                startup:
+                                    enabled: false          
                 replicas: 1
                 type: Deployment
