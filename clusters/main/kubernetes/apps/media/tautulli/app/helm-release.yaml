@@ -58,12 +58,12 @@ spec:
                 pathType: Prefix
     persistence:
       config:
-        volsync:
-          - name: minio
-            type: restic
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: false
+#        volsync:
+#          - name: minio
+#            type: restic
+#            credentials: s3
+#            dest:
+#              enabled: true
+#            src:
+#              enabled: false
 
