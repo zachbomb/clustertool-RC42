@@ -56,6 +56,14 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+    service:
+      main:
+        enabled: true
+        loadBalancerIP: ${TAUTULLI_IP}
+        ports:
+          main:
+            port: 10097
+        type: LoadBalancer
     persistence:
       config:
 #        volsync:
