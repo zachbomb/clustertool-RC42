@@ -74,6 +74,9 @@ controlPlane:
           discard_unpacked_layers = false
         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
           discard_unpacked_layers = false
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.sandbox]
+          type = "io.containerd.runtime.v1.linux"
+          endpoint = "/run/containerd/containerd.sock"
         [plugins."io.containerd.cri.v1.images"]
           discard_unpacked_layers = false
       permissions: 0
@@ -121,6 +124,9 @@ worker:
           discard_unpacked_layers = false
         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
           discard_unpacked_layers = false
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.sandbox]
+          type = "io.containerd.runtime.v1.linux"
+          endpoint = "/run/containerd/containerd.sock"
         [plugins."io.containerd.cri.v1.images"]
           discard_unpacked_layers = false
       permissions: 0
