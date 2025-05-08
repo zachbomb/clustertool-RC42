@@ -16,3 +16,4 @@ resources:
   - dizquetv/ks.yaml
   - plex/ks.yaml
   - emby/ks.yaml
+  - tautulli/ks.yaml
