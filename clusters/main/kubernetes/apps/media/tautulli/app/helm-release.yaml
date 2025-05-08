@@ -10,12 +10,11 @@ spec:
   chart:
     spec:
       chart: tautulli
-      version: 20.6.2
+      version: 20.6.0
       sourceRef:
         kind: HelmRepository
         name: truecharts
         namespace: flux-system
-      interval: 15m
   timeout: 20m
   maxHistory: 3
   install:
@@ -66,12 +65,5 @@ spec:
         type: LoadBalancer
     persistence:
       config:
-#        volsync:
-#          - name: minio
-#            type: restic
-#            credentials: s3
-#            dest:
-#              enabled: true
-#            src:
-#              enabled: false
-
+        enabled: true
+        mountPath: /config
