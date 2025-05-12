@@ -28,6 +28,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    securityContext:
+      readOnlyRootFilesystem: false
     credentials:
       s3:
         type: s3
