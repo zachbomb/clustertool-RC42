@@ -65,7 +65,4 @@ spec:
           main:
             port: 10097
         type: LoadBalancer
-    persistence:
-      config:
-        enabled: true
-        mountPath: /config
+
