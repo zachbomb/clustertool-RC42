@@ -90,8 +90,7 @@ controlPlane:
         noatime=True
       permissions: 420
       path: /etc/nfsmount.conf
-      op: overwrite
-
+      op: create
 worker:
     patches:
         - '@./patches/worker.yaml'
